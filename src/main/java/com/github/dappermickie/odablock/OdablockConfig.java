@@ -71,6 +71,16 @@ public interface OdablockConfig extends Config
 	default boolean welcomeScreen()
 	{
 		return true;
+
+		keyName = "showSidebar",
+		name = "Show Override Sidebar",
+		description = "Show the sound override sidebar panel on the right side of the screen.",
+		section = GENERAL_SECTION,
+		position = 15
+	)
+	default boolean showSidebar()
+	{
+		return false;
 	}
 
 	// =========================================================================

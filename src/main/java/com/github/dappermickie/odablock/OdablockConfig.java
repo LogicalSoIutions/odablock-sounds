@@ -277,7 +277,7 @@ public interface OdablockConfig extends Config
 	@ConfigItem(
 		keyName = "announceLevel99",
 		name = "Level 99",
-		description = "Should Odablock play the gamon sound when you reach level 99 in a skill? This replaces the standard level-up sound for that milestone.",
+		description = "Should Odablock play a sound when you reach level 99 in a skill? Uses Regular Gamon, or Big Gmon when that 99 completes max total level (2376). This replaces the standard level-up sound for that milestone.",
 		section = ACHIEVEMENTS_SECTION,
 		position = 43
 	)

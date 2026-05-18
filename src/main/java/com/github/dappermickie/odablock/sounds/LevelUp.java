@@ -35,10 +35,14 @@ public class LevelUp
 	@Inject
 	private ScheduledExecutorService executor;
 
+	private static final int MAX_TOTAL_LEVEL = 2376;
+
 	private static final String message = "Level up: completed.";
 	private static final String level99Message = "Level 99: completed.";
+	private static final String maxTotalLevelMessage = "Max total level: completed.";
 
 	private final Map<Skill, Integer> oldExperience = new EnumMap<>(Skill.class);
+	private int oldTotalLevel = -1;
 
 	public void onStatChanged(StatChanged statChanged)
 	{
@@ -70,11 +74,32 @@ public class LevelUp
 
 		if (justReached99 && config.announceLevel99())
 		{
+			final int totalLevelAfter = client.getTotalLevel();
+			final int totalLevelBefore = oldTotalLevel;
+			oldTotalLevel = totalLevelAfter;
+
+			final boolean justMaxed = totalLevelBefore >= 0
+				&& totalLevelBefore < MAX_TOTAL_LEVEL
+				&& totalLevelAfter >= MAX_TOTAL_LEVEL;
+
 			if (config.showChatMessages())
 			{
-				client.addChatMessage(ChatMessageType.PUBLICCHAT, ODABLOCK, level99Message, null);
+				client.addChatMessage(
+					ChatMessageType.PUBLICCHAT,
+					ODABLOCK,
+					justMaxed ? maxTotalLevelMessage : level99Message,
+					null
+				);
 			}
-			soundEngine.playClip(Sound.GAMON_GO_LIVE, SoundOverrideAction.LEVEL_99, executor);
+
+			if (justMaxed)
+			{
+				soundEngine.playClip(Sound.BIG_GMON, SoundOverrideAction.MAX_TOTAL_LEVEL, executor);
+			}
+			else
+			{
+				soundEngine.playClip(Sound.REGULAR_GAMON, SoundOverrideAction.LEVEL_99, executor);
+			}
 			return;
 		}
 
@@ -91,6 +116,7 @@ public class LevelUp
 	public void clear()
 	{
 		oldExperience.clear();
+		oldTotalLevel = -1;
 	}
 
 	public void setOldExperience()
@@ -99,5 +125,6 @@ public class LevelUp
 		{
 			oldExperience.put(skill, client.getSkillExperience(skill));
 		}
+		oldTotalLevel = client.getTotalLevel();
 	}
 }

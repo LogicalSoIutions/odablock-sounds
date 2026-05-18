@@ -1,6 +1,5 @@
 package com.github.dappermickie.odablock.sounds;
 
-import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
 import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import java.util.concurrent.ScheduledExecutorService;
@@ -18,6 +17,6 @@ public class LivestreamLiveSound
 
 	public void playSound()
 	{
-		soundEngine.playClip(Sound.GAMON_GO_LIVE, SoundOverrideAction.LIVESTREAM_GO_LIVE, executor);
+		soundEngine.playClip(SoundOverrideAction.LIVESTREAM_GO_LIVE, executor);
 	}
 }

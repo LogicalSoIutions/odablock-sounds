@@ -241,6 +241,10 @@ public class SoundOverrideService
 
 	public Set<String> getDefaultStorageKeys(final SoundOverrideAction action, final boolean refreshCache)
 	{
+		if (action.getDefaultSound() == null)
+		{
+			return Collections.emptySet();
+		}
 		String actionDirectory = action.getDefaultSound().getDirectory();
 		List<File> defaultFiles = SoundFileManager.listFilesInDirectory(actionDirectory, refreshCache);
 		LinkedHashSet<String> keys = new LinkedHashSet<>();
@@ -260,7 +264,8 @@ public class SoundOverrideService
 		}
 		uniqueDirectories.add(SoundFileManager.CUSTOM_DIRECTORY);
 
-		String defaultDirectory = action.getDefaultSound().getDirectory();
+		final Sound defaultSound = action.getDefaultSound();
+		final String defaultDirectory = defaultSound != null ? defaultSound.getDirectory() : null;
 		List<SoundOverrideOption> options = new ArrayList<>();
 
 		for (String directory : uniqueDirectories)
@@ -278,7 +283,7 @@ public class SoundOverrideService
 				filesByLabel.computeIfAbsent(normalized, ignored -> new ArrayList<>()).add(file);
 			}
 
-			boolean isDefaultDir = directory.equals(defaultDirectory);
+			boolean isDefaultDir = defaultDirectory != null && directory.equals(defaultDirectory);
 
 			for (Map.Entry<String, List<File>> entry : filesByLabel.entrySet())
 			{
@@ -328,6 +333,10 @@ public class SoundOverrideService
 		if (separatorIndex < 0)
 		{
 			// Legacy: filename only -> assume action's own directory
+			if (action.getDefaultSound() == null)
+			{
+				return null;
+			}
 			directory = action.getDefaultSound().getDirectory();
 			fileName = storageKey;
 		}
@@ -342,6 +351,10 @@ public class SoundOverrideService
 	private String promoteLegacyKey(String storageKey, SoundOverrideAction action)
 	{
 		if (storageKey == null || storageKey.isEmpty() || storageKey.contains("/"))
+		{
+			return storageKey;
+		}
+		if (action.getDefaultSound() == null)
 		{
 			return storageKey;
 		}

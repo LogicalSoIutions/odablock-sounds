@@ -90,6 +90,10 @@ public class SoundEngine
 			File soundFile = action == null
 				? SoundFileManager.getSoundStream(sound)
 				: soundOverrideService.getRandomOverrideFile(action).orElseGet(() -> {
+					if (sound == null)
+					{
+						return null;
+					}
 					try
 					{
 						return SoundFileManager.getSoundStream(sound);

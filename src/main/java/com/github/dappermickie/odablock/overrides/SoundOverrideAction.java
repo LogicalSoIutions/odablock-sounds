@@ -10,7 +10,8 @@ public enum SoundOverrideAction
 {
 	DEATH("death", "Death", Sound.DEATH),
 	LEVEL_UP("levelUp", "Level Up", Sound.LEVEL_UP),
-	LEVEL_99("level99", "Level 99", Sound.GAMON_GO_LIVE),
+	LEVEL_99("level99", "Level 99", Sound.REGULAR_GAMON),
+	MAX_TOTAL_LEVEL("maxTotalLevel", "Max Total Level", Sound.BIG_GMON),
 	COLLECTION_LOG("collectionLog", "Collection Log", Sound.COLLECTION_LOG_SLOT),
 	QUEST_COMPLETED("questCompleted", "Quest Completed", Sound.QUEST),
 	COMBAT_ACHIEVEMENT("combatAchievement", "Combat Achievement", Sound.COMBAT_TASK),
@@ -50,7 +51,7 @@ public enum SoundOverrideAction
 	KILLING_RAT("killingRat", "Killing Rat/Scurrius", Sound.KILLING_RAT_OR_SCURRIUS_1),
 	SPELLBOOK_SWAP("spellbookSwap", "Spellbook Swap", Sound.SPELLBOOK_SWAP_1),
 	NOTIFICATION_ALERT("notificationAlert", "Notification Alert", Sound.ODAS_ALERT),
-	LIVESTREAM_GO_LIVE("livestreamGoLive", "Livestream Go Live", Sound.GAMON_GO_LIVE),
+	LIVESTREAM_GO_LIVE("livestreamGoLive", "Livestream Go Live", null),
 	PHOENIX_NECKLACE("phoenixNecklace", "Phoenix Necklace", Sound.PHOENIX_NECKLACE);
 
 	private final String key;

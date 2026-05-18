@@ -98,7 +98,9 @@ public class NotificationManager {
 					
 					if (shouldNotify) {
 						sendMessage(notification);
-						soundEngine.playClip(Sound.ODAS_ALERT, SoundOverrideAction.NOTIFICATION_ALERT, executor);
+						if (config.notificationPlaySound()) {
+							soundEngine.playClip(Sound.ODAS_ALERT, SoundOverrideAction.NOTIFICATION_ALERT, executor);
+						}
 					}
 				}
 			}

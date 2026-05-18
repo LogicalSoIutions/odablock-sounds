@@ -2,8 +2,7 @@ package com.github.dappermickie.odablock.notifications;
 
 import lombok.Getter;
 
-public class Notification
-{
+public class Notification {
 	@Getter
 	private String message;
 

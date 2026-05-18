@@ -740,6 +740,18 @@ public interface OdablockConfig extends Config
 		return Color.RED;
 	}
 
+	@ConfigItem(
+		keyName = "notificationPlaySound",
+		name = "Play Sound",
+		description = "Should Odablock play a sound when a notification is sent?",
+		section = NOTIFICATION_SECTION,
+		position = 603
+	)
+	default boolean notificationPlaySound()
+	{
+		return true;
+	}
+
 	// =========================================================================
 	// Developer (always last)
 	// =========================================================================

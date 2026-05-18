@@ -93,6 +93,8 @@ public enum Sound
 	SPELLBOOK_SWAP_2("spellbookswap", "SpellbookSwap_r2.wav"),
 	SPELLBOOK_SWAP_3("spellbookswap", "SpellbookSwap_r3.wav"),
 
+	ODAS_ALERT("odasalert", "OdasAlert.wav"),
+
 	WARRIOR("warriors", "odablock_warriors.wav");
 
 	private final String resourceName;

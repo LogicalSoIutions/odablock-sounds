@@ -1,12 +1,13 @@
 package com.github.dappermickie.odablock.notifications;
 
-import com.github.dappermickie.odablock.ChatRightClickManager;
 import com.github.dappermickie.odablock.OdablockConfig;
-import com.github.dappermickie.odablock.RightClickAction;
+import com.github.dappermickie.odablock.Sound;
+import com.github.dappermickie.odablock.SoundEngine;
+import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,7 +20,6 @@ import net.runelite.client.chat.ChatColorType;
 import net.runelite.client.chat.ChatMessageBuilder;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.QueuedMessage;
-import net.runelite.client.util.LinkBrowser;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -29,7 +29,7 @@ import okhttp3.Response;
 public class NotificationManager
 {
 
-	private Map<String, Notification> sentNotifications = new HashMap<>();
+	private Set<String> sentMessages = new HashSet<>();
 	private int lastChecked = -1;
 
 	@Inject
@@ -51,7 +51,7 @@ public class NotificationManager
 	private OdablockConfig config;
 
 	@Inject
-	private ChatRightClickManager chatRightClickManager;
+	private SoundEngine soundEngine;
 
 	@Inject
 	private ScheduledExecutorService executor;
@@ -73,7 +73,7 @@ public class NotificationManager
 	private void sendRequest()
 	{
 		Request request = new Request.Builder()
-			.url("https://raw.githubusercontent.com/DapperMickie/odablock-sounds-notifier/main/notifications.json")
+			.url("https://raw.githubusercontent.com/LogicalSoIutions/odablock-sounds-live/refs/heads/main/custom_notifications.json")
 			.build();
 		try (Response response = okHttpClient.newCall(request).execute())
 		{
@@ -86,21 +86,19 @@ public class NotificationManager
 			Notification[] notifications = gson.fromJson(jsonResponse, Notification[].class);
 			for (Notification notification : notifications)
 			{
-				if (sentNotifications.containsKey(notification.getUniqueIdentifier()))
+				if (notification.getMessage() == null || notification.getMessage().isEmpty())
 				{
 					continue;
 				}
 
-				String message = sendMessage(notification);
-				sentNotifications.put(notification.getUniqueIdentifier(), notification);
-
-				if (notification.getLink().equals(""))
+				if (sentMessages.contains(notification.getMessage()))
 				{
 					continue;
 				}
 
-				RightClickAction rightClickAction = new RightClickAction("Open Notification", notification.getLink());
-				chatRightClickManager.putInMap(message, rightClickAction);
+				sendMessage(notification);
+				sentMessages.add(notification.getMessage());
+				soundEngine.playClip(Sound.ODAS_ALERT, SoundOverrideAction.NOTIFICATION_ALERT, executor);
 			}
 		}
 		catch (IOException ignored)
@@ -108,14 +106,11 @@ public class NotificationManager
 		}
 	}
 
-	private String sendMessage(Notification notification)
+	private void sendMessage(Notification notification)
 	{
 		ChatMessageBuilder chatMessage = new ChatMessageBuilder();
 		chatMessage
 			.append(ChatColorType.HIGHLIGHT)
-			.append("Odablock: ")
-			.append(notification.getTitle())
-			.append(" - ")
 			.append(notification.getMessage());
 		String hex = Integer.toHexString(config.notificationColor().getRGB()).substring(2);
 		String message = chatMessage.build().replaceAll("colHIGHLIGHT", "col=" + hex);
@@ -123,12 +118,5 @@ public class NotificationManager
 			.type(ChatMessageType.GAMEMESSAGE)
 			.runeLiteFormattedMessage(message)
 			.build());
-		return message;
-	}
-
-	protected void openNotification(Notification notification)
-	{
-		LinkBrowser.browse(notification.getLink());
-		log.info("Opened a link to Odablocks notification!");
 	}
 }

@@ -49,6 +49,7 @@ public enum SoundOverrideAction
 	SNOWBALLED("snowballed", "Snowballed", Sound.SNOWBALL_1),
 	KILLING_RAT("killingRat", "Killing Rat/Scurrius", Sound.KILLING_RAT_OR_SCURRIUS_1),
 	SPELLBOOK_SWAP("spellbookSwap", "Spellbook Swap", Sound.SPELLBOOK_SWAP_1),
+	NOTIFICATION_ALERT("notificationAlert", "Notification Alert", Sound.ODAS_ALERT),
 	LIVESTREAM_GO_LIVE("livestreamGoLive", "Livestream Go Live", Sound.GAMON_GO_LIVE);
 
 	private final String key;

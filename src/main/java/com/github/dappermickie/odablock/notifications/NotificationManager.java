@@ -111,6 +111,7 @@ public class NotificationManager
 		ChatMessageBuilder chatMessage = new ChatMessageBuilder();
 		chatMessage
 			.append(ChatColorType.HIGHLIGHT)
+			.append("Odablock just sent an announcement ~ ")
 			.append(notification.getMessage());
 		String hex = Integer.toHexString(config.notificationColor().getRGB()).substring(2);
 		String message = chatMessage.build().replaceAll("colHIGHLIGHT", "col=" + hex);

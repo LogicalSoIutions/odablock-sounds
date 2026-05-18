@@ -16,47 +16,47 @@ BEFORE TRYING ANYTHING ELSE, ENABLE THIS IN THE **RUNESCAPE** SETTINGS
 Whenever this does not resolve your issue, please feel free to look in the [Issues](https://github.com/DapperMickie/odablock-sounds/issues) section of this GitHub page to see if anyone else had this issue.
 ___
 
-## Customizing your sounds
+## Customizing Your Sounds
 
-### Warning
+### The `custom` Folder
 
-Because we have a system in place that automatically updates the sounds for this plugin, it is highly recommended to have a backup folder of your custom sounds. The system __will always__ override all the sounds whenever a sound update comes out. This means that after each sound update, you will have to replace all your custom sounds again.
+The easiest way to add your own sounds is through the **`custom`** folder. This folder is located at:
 
-### 1. Locate your `.runelite` folder
+```
+C:\Users\<your username>\.runelite\odablock-sounds\custom\
+```
 
-On Windows this is likely to be here: `C:\Users\<your username>\.runelite`
+This folder is **never overwritten** during plugin updates — your custom sounds are always safe.
 
-If you aren't sure, it's the same place that stores your `settings.properties`
+### 1. Add your sound files
 
-Within this `.runelite` folder, there should be a `odablock-sounds` folder, which is where the sound files are downloaded to
+Drop any `.wav` files into the `custom` folder. That's it!
 
-### 2. Prepare your sound files
+> **Important:** Files must be actual `.wav` format — just renaming a `.mp3` to `.wav` won't work. Use a converter if needed.
 
-Make sure your files are all `.wav` format (just changing the extension won't work, actually convert them)
+### 2. Name your files
 
-Make sure the file name __exactly__ matches the name of the existing file (in `odablock-sounds` folder) you want to replace
+Use `_` (underscores) or `-` (dashes) to separate words in your file names. The plugin will automatically turn them into clean labels in the UI.
 
-### 3. Understand how the files are handled
+| File Name | Displays As |
+|---|---|
+| `my_death_sound.wav` | My Death Sound |
+| `epic-ags-spec.wav` | Epic AGS Spec |
+| `BigHit.wav` | Big Hit |
 
-If you replace an existing file in `odablock-sounds` using exactly the same file name, your sound will be loaded instead
+### 3. Assign sounds via the Override Picker
 
-If you place a new file with an unexpected file name in `odablock-sounds`, it will be deleted
+Once your files are in the `custom` folder, open the **Sound Overrides** panel in the plugin sidebar. Your custom sounds will appear as options for **any** sound action — just check the ones you want to use.
 
-If you place a new folder inside `odablock-sounds` that is unexpected, this should be left as is, so can be used to store multiple sounds that you may want to swap in at a future date
+### Troubleshooting
 
-If you want to revert to a default sound file, simply delete the relevant file in `odablock-sounds` and the default file will be re-downloaded when the plugin next starts
+- **Sound doesn't play?** Make sure the event plays the default sound first. If it doesn't, the issue is in our plugin or your _in-game_ settings (e.g., collection log notifications must be enabled in-game).
+- **File not showing in the picker?** Confirm it's a valid `.wav` file and is inside the `custom` folder. Restart the client if needed.
+- **Want to reset everything?** Delete the `odablock-sounds` folder and reload your client. All defaults will re-download and a fresh `custom` folder will be created.
 
-### 4. If it fails to play your sound
+### Legacy Custom Folders
 
-Remove your sound and make sure it plays the default sound for that event - if not, there is something misconfigured in your plugin _or in-game_ settings. For example, the collection log event can only be captured if your _in-game_ notifications for collection log slots are turned on
-
-Check that your file is actually a valid `.wav` and not just a renamed `.mp3` or similar
-
-Check that the file is still there in the `odablock-sounds` folder, if you accidentally used an incorrect file name, it won't have been loaded, and will have been deleted
-
-### 5. Resetting all sounds
-
-You can reset all the sounds by deleting the `odablock-sounds` folder and then reloading your client.
+If you previously used the per-sound-directory `custom` subfolders (e.g., `odablock-sounds/death/custom/`), those still work. However, we recommend moving your files into the single root `custom` folder for simplicity — it's easier to manage and will never be deleted.
 ___
 
 ## Other information

@@ -489,6 +489,50 @@ public interface OdablockConfig extends Config
 		return true;
 	}
 
+	@ConfigItem(
+		keyName = "freezeSound",
+		name = "Freeze Sound",
+		description = "Do you want to play the 'Stop right there mr. squidward' sound when you get frozen?",
+		position = 35
+	)
+	default boolean freezeSound()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "cryptSound",
+		name = "Crypt Sound",
+		description = "Do you want to play the 'I did well..' sound when you enter the Barrows Crypts?",
+		position = 36
+	)
+	default boolean cryptSound()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "serynaSound",
+		name = "Seryna Sound",
+		description = "Do you want to play the 'Inshallah I will eat in 1 hour' sound when the sandwich lady spawns?",
+		position = 37
+	)
+	default boolean serynaSound()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "welcomeScreen",
+		name = "Welcome Screen",
+		description = "Do you want to play the '' sound whenever you login and the welcome screen pops up?",
+		position = 39
+	)
+	default boolean welcomeScreen()
+	{
+		return true;
+	}
+
 	// =========================================================================
 	// Raids
 	// =========================================================================

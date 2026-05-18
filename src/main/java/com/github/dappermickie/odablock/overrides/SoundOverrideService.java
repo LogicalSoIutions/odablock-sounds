@@ -258,6 +258,7 @@ public class SoundOverrideService
 		{
 			uniqueDirectories.add(sound.getDirectory());
 		}
+		uniqueDirectories.add(SoundFileManager.CUSTOM_DIRECTORY);
 
 		String defaultDirectory = action.getDefaultSound().getDirectory();
 		List<SoundOverrideOption> options = new ArrayList<>();

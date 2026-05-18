@@ -34,6 +34,8 @@ public abstract class SoundFileManager
 {
 
 	private static final File DOWNLOAD_DIR = new File(RuneLite.RUNELITE_DIR.getPath() + File.separator + "odablock-sounds");
+	public static final String CUSTOM_DIRECTORY = "custom";
+	private static final File CUSTOM_DIR = new File(DOWNLOAD_DIR, CUSTOM_DIRECTORY);
 	private static final String DELETE_WARNING_FILENAME = "EXTRA_FILES_WILL_BE_DELETED_BUT_FOLDERS_WILL_REMAIN";
 	private static final String SOUNDVERSION_FILENAME = "SOUNDVERSION";
 	private static final File DELETE_WARNING_FILE = new File(DOWNLOAD_DIR, DELETE_WARNING_FILENAME);
@@ -50,6 +52,10 @@ public abstract class SoundFileManager
 		{
 			DOWNLOAD_DIR.mkdirs();
 		}
+		if (!CUSTOM_DIR.exists())
+		{
+			CUSTOM_DIR.mkdirs();
+		}
 		try
 		{
 			DELETE_WARNING_FILE.createNewFile();
@@ -65,11 +71,6 @@ public abstract class SoundFileManager
 		if (!soundDirectory.exists())
 		{
 			soundDirectory.mkdirs();
-		}
-		File customDirectory = new File(soundDirectory, "custom");
-		if (!customDirectory.exists())
-		{
-			customDirectory.mkdirs();
 		}
 		try
 		{

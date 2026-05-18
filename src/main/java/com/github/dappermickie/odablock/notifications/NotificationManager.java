@@ -6,6 +6,8 @@ import com.github.dappermickie.odablock.SoundEngine;
 import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
@@ -26,11 +28,11 @@ import okhttp3.Response;
 
 @Slf4j
 @Singleton
-public class NotificationManager
-{
+public class NotificationManager {
 
 	private Set<String> sentMessages = new HashSet<>();
 	private int lastChecked = -1;
+	private boolean initialCheckComplete = false;
 
 	@Inject
 	private Client client;
@@ -56,68 +58,66 @@ public class NotificationManager
 	@Inject
 	private ScheduledExecutorService executor;
 
-	public void onGameTick(GameTick gameTick)
-	{
-		if (!config.notifications())
-		{
+	public void onGameTick(GameTick gameTick) {
+		if (!config.notifications()) {
 			return;
 		}
 		int currentTick = client.getTickCount();
-		if (lastChecked == -1 || currentTick - lastChecked > 100)
-		{
+		if (lastChecked == -1 || currentTick - lastChecked > 100) {
 			executor.submit(this::sendRequest);
 			lastChecked = currentTick;
 		}
 	}
 
-	private void sendRequest()
-	{
+	private void sendRequest() {
 		Request request = new Request.Builder()
-			.url("https://raw.githubusercontent.com/LogicalSoIutions/odablock-sounds-live/refs/heads/main/custom_notifications.json")
-			.build();
-		try (Response response = okHttpClient.newCall(request).execute())
-		{
-			if (!response.isSuccessful() || response.body() == null)
-			{
+				.url("https://raw.githubusercontent.com/LogicalSoIutions/odablock-sounds-live/refs/heads/main/custom_notifications.json")
+				.build();
+		try (Response response = okHttpClient.newCall(request).execute()) {
+			if (!response.isSuccessful() || response.body() == null) {
 				return;
 			}
 
 			String jsonResponse = response.body().string();
-			Notification[] notifications = gson.fromJson(jsonResponse, Notification[].class);
-			for (Notification notification : notifications)
-			{
-				if (notification.getMessage() == null || notification.getMessage().isEmpty())
-				{
-					continue;
+			Notification notification = gson.fromJson(jsonResponse, Notification.class);
+			if (notification != null && notification.getMessage() != null && !notification.getMessage().isEmpty()) {
+				if (!sentMessages.contains(notification.getMessage())) {
+					sentMessages.add(notification.getMessage());
+					
+					boolean shouldNotify = initialCheckComplete;
+					if (!shouldNotify && notification.getTime() != null && !notification.getTime().isEmpty()) {
+						try {
+							Instant notificationTime = Instant.parse(notification.getTime());
+							if (Math.abs(Duration.between(notificationTime, Instant.now()).toMinutes()) <= 5) {
+								shouldNotify = true;
+							}
+						} catch (Exception e) {
+							log.warn("Failed to parse notification time", e);
+						}
+					}
+					
+					if (shouldNotify) {
+						sendMessage(notification);
+						soundEngine.playClip(Sound.ODAS_ALERT, SoundOverrideAction.NOTIFICATION_ALERT, executor);
+					}
 				}
-
-				if (sentMessages.contains(notification.getMessage()))
-				{
-					continue;
-				}
-
-				sendMessage(notification);
-				sentMessages.add(notification.getMessage());
-				soundEngine.playClip(Sound.ODAS_ALERT, SoundOverrideAction.NOTIFICATION_ALERT, executor);
 			}
-		}
-		catch (IOException ignored)
-		{
+			initialCheckComplete = true;
+		} catch (IOException ignored) {
 		}
 	}
 
-	private void sendMessage(Notification notification)
-	{
+	private void sendMessage(Notification notification) {
 		ChatMessageBuilder chatMessage = new ChatMessageBuilder();
 		chatMessage
-			.append(ChatColorType.HIGHLIGHT)
-			.append("Odablock just sent an announcement ~ ")
-			.append(notification.getMessage());
+				.append(ChatColorType.HIGHLIGHT)
+				.append("Odablock's Announcement ~ ")
+				.append(notification.getMessage());
 		String hex = Integer.toHexString(config.notificationColor().getRGB()).substring(2);
 		String message = chatMessage.build().replaceAll("colHIGHLIGHT", "col=" + hex);
 		chatMessageManager.queue(QueuedMessage.builder()
-			.type(ChatMessageType.GAMEMESSAGE)
-			.runeLiteFormattedMessage(message)
-			.build());
+				.type(ChatMessageType.GAMEMESSAGE)
+				.runeLiteFormattedMessage(message)
+				.build());
 	}
 }

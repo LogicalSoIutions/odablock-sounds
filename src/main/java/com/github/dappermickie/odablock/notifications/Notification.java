@@ -6,4 +6,7 @@ public class Notification
 {
 	@Getter
 	private String message;
+
+	@Getter
+	private String time;
 }

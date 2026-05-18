@@ -240,6 +240,9 @@ public class OdablockPlugin extends Plugin
 
 	@Inject
 	private WelcomeScreenSound welcomeScreen;
+
+	@Inject
+	private com.github.dappermickie.odablock.sounds.PhoenixNecklace phoenixNecklace;
 	// End of sound injections
 
 	@Inject
@@ -461,6 +464,10 @@ public class OdablockPlugin extends Plugin
 			return;
 		}
 		else if (cryptSound.onChatMessage(chatMessage))
+		{
+			return;
+		}
+		else if (phoenixNecklace.onChatMessage(chatMessage))
 		{
 			return;
 		}

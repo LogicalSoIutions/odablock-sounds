@@ -50,7 +50,8 @@ public enum SoundOverrideAction
 	KILLING_RAT("killingRat", "Killing Rat/Scurrius", Sound.KILLING_RAT_OR_SCURRIUS_1),
 	SPELLBOOK_SWAP("spellbookSwap", "Spellbook Swap", Sound.SPELLBOOK_SWAP_1),
 	NOTIFICATION_ALERT("notificationAlert", "Notification Alert", Sound.ODAS_ALERT),
-	LIVESTREAM_GO_LIVE("livestreamGoLive", "Livestream Go Live", Sound.GAMON_GO_LIVE);
+	LIVESTREAM_GO_LIVE("livestreamGoLive", "Livestream Go Live", Sound.GAMON_GO_LIVE),
+	PHOENIX_NECKLACE("phoenixNecklace", "Phoenix Necklace", Sound.PHOENIX_NECKLACE);
 
 	private final String key;
 	private final String displayName;

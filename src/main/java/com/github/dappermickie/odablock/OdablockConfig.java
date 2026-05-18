@@ -418,6 +418,18 @@ public interface OdablockConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "phoenixNecklace",
+		name = "Phoenix Necklace",
+		description = "Should Odablock say something when your phoenix necklace breaks?",
+		section = INTERACTIONS_SECTION,
+		position = 54
+	)
+	default boolean phoenixNecklace()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "petDog",
 		name = "Pet the Dog",
 		description = "Should Stella say 'Who's a good little zoggy!' when you pet the dog?",

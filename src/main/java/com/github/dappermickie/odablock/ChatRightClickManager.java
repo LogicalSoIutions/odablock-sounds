@@ -38,7 +38,7 @@ public class ChatRightClickManager
 
 	public void onGameTick(GameTick event)
 	{
-		Widget chatWidget = client.getWidget(ComponentID.CHATBOX_MESSAGE_LINES);
+		Widget chatWidget = client.getWidget(10616890);
 		if (chatWidget != null)
 		{
 			for (Widget w : chatWidget.getDynamicChildren())

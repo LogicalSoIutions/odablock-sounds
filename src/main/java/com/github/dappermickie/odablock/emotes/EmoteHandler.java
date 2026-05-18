@@ -41,23 +41,27 @@ public class EmoteHandler
 	@Inject
 	private OdablockConfig config;
 
-	private int[] iconIds;
+	private int[] chatIconIds;
+	private int[] overheadIconIds;
 
 	public void loadEmotes()
 	{
-		if (iconIds != null)
+		if (chatIconIds != null)
 		{
 			return;
 		}
 
 		Emote[] emotes = Emote.values();
-		iconIds = new int[emotes.length];
+		chatIconIds = new int[emotes.length];
+		overheadIconIds = new int[emotes.length];
 
 		for (int i = 0; i < emotes.length; i++)
 		{
 			final Emote emoji = emotes[i];
-			final BufferedImage image = emoji.loadImage();
-			iconIds[i] = chatIconManager.registerChatIcon(image);
+			final BufferedImage chatImage = emoji.loadImage();
+			final BufferedImage overheadImage = emoji.loadOverheadImage();
+			chatIconIds[i] = chatIconManager.registerChatIcon(chatImage);
+			overheadIconIds[i] = chatIconManager.registerChatIcon(overheadImage);
 		}
 	}
 
@@ -68,7 +72,7 @@ public class EmoteHandler
 			return;
 		}
 
-		if (iconIds == null)
+		if (chatIconIds == null)
 		{
 			return;
 		}
@@ -91,7 +95,7 @@ public class EmoteHandler
 
 		final MessageNode messageNode = chatMessage.getMessageNode();
 		final String message = messageNode.getValue();
-		final String updatedMessage = updateMessage(message);
+		final String updatedMessage = updateMessage(message, false);
 
 		if (updatedMessage == null)
 		{
@@ -114,7 +118,7 @@ public class EmoteHandler
 		}
 
 		final String message = event.getOverheadText();
-		final String updatedMessage = updateMessage(message);
+		final String updatedMessage = updateMessage(message, true);
 
 		if (updatedMessage == null)
 		{
@@ -137,7 +141,7 @@ public class EmoteHandler
 		client.addChatMessage(ChatMessageType.GAMEMESSAGE, ODABLOCK, "Odablock emote list:", null);
 		for (Emote emote : Emote.values())
 		{
-			final int emoteId = iconIds[emote.ordinal()];
+			final int emoteId = chatIconIds[emote.ordinal()];
 			final String emoteImage = "<img=" + chatIconManager.chatIconIndex(emoteId) + ">";
 			StringBuilder chatMessageSb = new StringBuilder();
 			chatMessageSb.append(emote.getTrigger());
@@ -180,7 +184,7 @@ public class EmoteHandler
 	}
 
 	@Nullable
-	String updateMessage(final String message)
+	String updateMessage(final String message, final boolean isOverhead)
 	{
 		final String[] messageWords = WHITESPACE_REGEXP.split(message);
 		final String[] ignoredEmotes = config.emoteIgnoreList().split(",");
@@ -213,7 +217,7 @@ public class EmoteHandler
 				break;
 			}
 
-			final int emoteId = iconIds[emote.ordinal()];
+			final int emoteId = isOverhead ? overheadIconIds[emote.ordinal()] : chatIconIds[emote.ordinal()];
 			messageWords[i] = messageWords[i].replace(originalTrigger, "<img=" + chatIconManager.chatIconIndex(emoteId) + ">");
 			editedMessage = true;
 		}

@@ -33,6 +33,7 @@ public class DismissRandomEvent
 	private static final String optionText = "Dismiss";
 	private static final int runePouchWidgetId = 983062;
 	private static final int lootingBagWidgetId = 983048;
+	private static final int chuggingBarrelWidgetId = 983103;
 
 	public void onMenuOptionClicked(MenuOptionClicked menuOptionClicked)
 	{
@@ -40,7 +41,7 @@ public class DismissRandomEvent
 		int widgetId = widget == null ? -1 : widget.getId();
 		String option = menuOptionClicked.getMenuOption();
 		// Dismiss random event
-		if (config.dismissRandomEvent() && option.equals(optionText) && widgetId != runePouchWidgetId && widgetId != lootingBagWidgetId)
+		if (config.dismissRandomEvent() && option.equals(optionText) && widgetId != runePouchWidgetId && widgetId != lootingBagWidgetId && widgetId != chuggingBarrelWidgetId)
 		{
 			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, SoundOverrideAction.DISMISS_RANDOM_EVENT, executor);
 		}

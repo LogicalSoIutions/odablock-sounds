@@ -61,6 +61,18 @@ public interface OdablockConfig extends Config
 		return true;
 	}
 
+	@ConfigItem(
+		keyName = "welcomeScreen",
+		name = "Welcome Screen",
+		description = "Do you want to play the '' sound whenever you login and the welcome screen pops up?",
+		section = GENERAL_SECTION,
+		position = 14
+	)
+	default boolean welcomeScreen()
+	{
+		return true;
+	}
+
 	// =========================================================================
 	// Specs & Combat
 	// =========================================================================
@@ -181,12 +193,12 @@ public interface OdablockConfig extends Config
 	}
 
 	// =========================================================================
-	// PvP
+	// PvP / PvM
 	// =========================================================================
 
 	@ConfigSection(
-		name = "PvP",
-		description = "PvP-related sounds.",
+		name = "PvP / PvM",
+		description = "PvP and PvM-related sounds.",
 		position = 30
 	)
 	String PVP_SECTION = "pvpSection";
@@ -235,6 +247,30 @@ public interface OdablockConfig extends Config
 		position = 34
 	)
 	default boolean snowballed()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "freezeSound",
+		name = "Freeze Sound",
+		description = "Do you want to play the 'Stop right there mr. squidward' sound when you get frozen?",
+		section = PVP_SECTION,
+		position = 35
+	)
+	default boolean freezeSound()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "cryptSound",
+		name = "Crypt Sound",
+		description = "Do you want to play the 'I did well..' sound when you enter Dharok's Barrows crypt?",
+		section = PVP_SECTION,
+		position = 36
+	)
+	default boolean cryptSound()
 	{
 		return true;
 	}
@@ -514,45 +550,13 @@ public interface OdablockConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "freezeSound",
-		name = "Freeze Sound",
-		description = "Do you want to play the 'Stop right there mr. squidward' sound when you get frozen?",
-		position = 35
-	)
-	default boolean freezeSound()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "cryptSound",
-		name = "Crypt Sound",
-		description = "Do you want to play the 'I did well..' sound when you enter the Barrows Crypts?",
-		position = 36
-	)
-	default boolean cryptSound()
-	{
-		return true;
-	}
-
-	@ConfigItem(
 		keyName = "serynaSound",
 		name = "Seryna Sound",
 		description = "Do you want to play the 'Inshallah I will eat in 1 hour' sound when the sandwich lady spawns?",
-		position = 37
+		section = INTERACTIONS_SECTION,
+		position = 60
 	)
 	default boolean serynaSound()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "welcomeScreen",
-		name = "Welcome Screen",
-		description = "Do you want to play the '' sound whenever you login and the welcome screen pops up?",
-		position = 39
-	)
-	default boolean welcomeScreen()
 	{
 		return true;
 	}

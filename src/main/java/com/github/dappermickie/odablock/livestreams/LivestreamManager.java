@@ -74,7 +74,9 @@ public class LivestreamManager
 		sendLiveLivestreamMessage(false);
 
 		int currentTick = client.getTickCount();
-		if (lastChecked == -1 || currentTick < lastChecked || currentTick - lastChecked > 100)
+		if (lastChecked == -1
+			|| currentTick < lastChecked
+			|| currentTick - lastChecked > 100)
 		{
 			executor.submit(() -> {
 				sendRequest(currentTick);

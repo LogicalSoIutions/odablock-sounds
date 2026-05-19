@@ -82,7 +82,7 @@ public interface OdablockConfig extends Config
 	)
 	default boolean showSidebar()
 	{
-		return false;
+		return true;
 	}
 
 	// =========================================================================

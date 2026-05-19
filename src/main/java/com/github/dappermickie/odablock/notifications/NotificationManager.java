@@ -5,9 +5,8 @@ import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
@@ -29,9 +28,13 @@ import okhttp3.Response;
 @Singleton
 public class NotificationManager {
 
-	private Set<String> sentMessages = new HashSet<>();
+	private static final String NOTIFICATIONS_URL =
+		"https://raw.githubusercontent.com/LogicalSoIutions/odablock-sounds-live/refs/heads/main/custom_notifications.json";
+
+	private final Set<String> sentMessages = new HashSet<>();
 	private int lastChecked = -1;
 	private boolean initialCheckComplete = false;
+	private String baselineMessage = null;
 
 	@Inject
 	private Client client;
@@ -57,10 +60,17 @@ public class NotificationManager {
 	@Inject
 	private ScheduledExecutorService executor;
 
+	public void resetStateForWorldHopOrLogin() {
+		lastChecked = -1;
+		initialCheckComplete = false;
+		baselineMessage = null;
+	}
+
 	public void onGameTick(GameTick gameTick) {
 		if (!config.notifications()) {
 			return;
 		}
+		handleTickReset();
 		int currentTick = client.getTickCount();
 		if (lastChecked == -1 || currentTick - lastChecked > 100) {
 			executor.submit(this::sendRequest);
@@ -68,9 +78,19 @@ public class NotificationManager {
 		}
 	}
 
+	private void handleTickReset() {
+		final int currentTick = client.getTickCount();
+		if (lastChecked != -1 && currentTick < lastChecked) {
+			lastChecked = -1;
+		}
+	}
+
 	private void sendRequest() {
+		// Cache-bust so GitHub raw CDN serves fresh JSON soon after updates.
+		final String url = NOTIFICATIONS_URL + "?t=" + System.currentTimeMillis();
 		Request request = new Request.Builder()
-				.url("https://raw.githubusercontent.com/LogicalSoIutions/odablock-sounds-live/refs/heads/main/custom_notifications.json")
+				.url(url)
+				.header("Cache-Control", "no-cache")
 				.build();
 		try (Response response = okHttpClient.newCall(request).execute()) {
 			if (!response.isSuccessful() || response.body() == null) {
@@ -80,30 +100,23 @@ public class NotificationManager {
 			String jsonResponse = response.body().string();
 			Notification notification = gson.fromJson(jsonResponse, Notification.class);
 			if (notification != null && notification.getMessage() != null && !notification.getMessage().isEmpty()) {
-				if (!sentMessages.contains(notification.getMessage())) {
-					sentMessages.add(notification.getMessage());
-					
-					boolean shouldNotify = initialCheckComplete;
-					if (!shouldNotify && notification.getTime() != null && !notification.getTime().isEmpty()) {
-						try {
-							Instant notificationTime = Instant.parse(notification.getTime());
-							if (Math.abs(Duration.between(notificationTime, Instant.now()).toMinutes()) <= 5) {
-								shouldNotify = true;
-							}
-						} catch (Exception e) {
-							log.warn("Failed to parse notification time", e);
-						}
-					}
-					
-					if (shouldNotify) {
-						sendMessage(notification);
-						if (config.notificationPlaySound()) {
-							soundEngine.playClip(Sound.ODAS_ALERT, executor);
-						}
-					}
+				final String message = notification.getMessage();
+				if (!initialCheckComplete) {
+					baselineMessage = message;
+					initialCheckComplete = true;
+					return;
 				}
+				if (Objects.equals(message, baselineMessage) || sentMessages.contains(message)) {
+					return;
+				}
+				sentMessages.add(message);
+				sendMessage(notification);
+				if (config.notificationPlaySound()) {
+					soundEngine.playClip(Sound.ODAS_ALERT, executor);
+				}
+			} else {
+				initialCheckComplete = true;
 			}
-			initialCheckComplete = true;
 		} catch (IOException ignored) {
 		}
 	}

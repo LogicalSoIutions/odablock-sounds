@@ -388,6 +388,7 @@ public class OdablockPlugin extends Plugin
 				// when game state becomes LOGGED_IN
 				//soundEngine.playClip(Sound.CLIENT_DISCONNECTS, executor);
 				livestreamManager.resetStateForWorldHopOrLogin();
+				notificationManager.resetStateForWorldHopOrLogin();
 
 				achievementDiaries.setLastLoginTick(-1);
 				prayerDown.setLastLoginTick(-1);

@@ -52,7 +52,8 @@ public enum SoundOverrideAction
 	SPELLBOOK_SWAP("spellbookSwap", "Spellbook Swap", Sound.SPELLBOOK_SWAP_1),
 	NOTIFICATION_ALERT("notificationAlert", "Notification Alert", Sound.ODAS_ALERT),
 	LIVESTREAM_GO_LIVE("livestreamGoLive", "Livestream Go Live", null),
-	PHOENIX_NECKLACE("phoenixNecklace", "Phoenix Necklace", Sound.PHOENIX_NECKLACE);
+	PHOENIX_NECKLACE("phoenixNecklace", "Phoenix Necklace", Sound.PHOENIX_NECKLACE),
+	GEMSTONE_CRAB_BURROW("gemstoneCrabBurrow", "Gemstone Crab Burrow", Sound.GEMSTONE_CRAB_BURROW);
 
 	private final String key;
 	private final String displayName;

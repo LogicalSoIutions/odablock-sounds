@@ -101,6 +101,7 @@ public enum Sound
 	WELCOME_SCREEN_SOUND("welcomescreen", "WelcomeScreen.wav"),
 	SERYNA_SOUND("seryna", "Seryna.wav"),
 	PHOENIX_NECKLACE("phoenixnecklace", "PhoenixNecklace.wav"),
+	GEMSTONE_CRAB_BURROW("gemstonecrabburrow", "GemstoneCrabBurrow.wav"),
 
 	WARRIOR("warriors", "odablock_warriors.wav");
 

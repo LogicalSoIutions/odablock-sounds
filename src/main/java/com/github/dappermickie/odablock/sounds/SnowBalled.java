@@ -5,7 +5,6 @@ import static com.github.dappermickie.odablock.OdablockPlugin.ODABLOCK;
 import com.github.dappermickie.odablock.SnowballUserManager;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,7 +88,7 @@ public class SnowBalled
 			if (playerWp.distanceTo2D(projectileWP) <= 2)
 			{
 				lastSnowballTriggerTick = currentTick;
-				soundEngine.playClip(Sound.SNOWBALL_1, SoundOverrideAction.SNOWBALLED, executor);
+				soundEngine.playClip(Sound.SNOWBALL_1, executor);
 				if (config.showChatMessages())
 				{
 					client.addChatMessage(ChatMessageType.PUBLICCHAT, ODABLOCK, player.getName() + " already kicked you!", null);

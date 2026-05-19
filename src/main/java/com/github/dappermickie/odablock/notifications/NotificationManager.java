@@ -3,7 +3,6 @@ package com.github.dappermickie.odablock.notifications;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.time.Duration;
@@ -99,7 +98,7 @@ public class NotificationManager {
 					if (shouldNotify) {
 						sendMessage(notification);
 						if (config.notificationPlaySound()) {
-							soundEngine.playClip(Sound.ODAS_ALERT, SoundOverrideAction.NOTIFICATION_ALERT, executor);
+							soundEngine.playClip(Sound.ODAS_ALERT, executor);
 						}
 					}
 				}

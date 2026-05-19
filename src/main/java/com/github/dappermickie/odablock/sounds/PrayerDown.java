@@ -4,7 +4,6 @@ import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
 import com.github.dappermickie.odablock.SoundIds;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
@@ -50,7 +49,7 @@ public class PrayerDown
 	{
 		if (canReplacePrayerDownSound() && checkLowPrayer())
 		{
-			soundEngine.playClip(Sound.SMITED_NO_PRAYER, SoundOverrideAction.PRAYER_DOWN, executor);
+			soundEngine.playClip(Sound.SMITED_NO_PRAYER, executor);
 		}
 	}
 

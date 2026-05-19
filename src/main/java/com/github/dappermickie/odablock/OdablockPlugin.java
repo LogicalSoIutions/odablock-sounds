@@ -395,7 +395,6 @@ public class OdablockPlugin extends Plugin
 				achievementDiaries.setLastLoginTick(currentTick);
 				prayerDown.setLastLoginTick(currentTick);
 				spellbookSwap.setLastLoginTick(currentTick);
-				welcomeScreen.onLogin();
 				break;
 		}
 	}
@@ -532,6 +531,7 @@ public class OdablockPlugin extends Plugin
 		hairDresser.onWidgetLoaded(event);
 		pkChest.onWidgetLoaded(event);
 		odablockWarriors.onWidgetLoaded(event);
+		welcomeScreen.onWidgetLoaded(event);
 	}
 
 	@Subscribe

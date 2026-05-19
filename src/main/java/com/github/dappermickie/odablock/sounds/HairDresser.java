@@ -4,7 +4,6 @@ import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.RandomSoundUtility;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
@@ -47,7 +46,7 @@ public class HairDresser
 			WorldPoint currentLocation = client.getLocalPlayer().getWorldLocation();
 			if (FALADOR_HAIRDRESSER.contains(currentLocation))
 			{
-				soundEngine.playClip(Sound.HAIRDRESSER_SOUND_1, SoundOverrideAction.HAIRDRESSER, executor);
+				soundEngine.playClip(Sound.HAIRDRESSER_SOUND_1, executor);
 			}
 			return;
 		}

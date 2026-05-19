@@ -3,7 +3,6 @@ package com.github.dappermickie.odablock.sounds;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -74,6 +73,6 @@ public class SpellbookSwap
 			return;
 		}
 
-		soundEngine.playClip(Sound.SPELLBOOK_SWAP_1, SoundOverrideAction.SPELLBOOK_SWAP, executor);
+		soundEngine.playClip(Sound.SPELLBOOK_SWAP_1, executor);
 	}
 }

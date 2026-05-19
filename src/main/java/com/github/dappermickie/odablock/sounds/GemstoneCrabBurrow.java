@@ -3,7 +3,6 @@ package com.github.dappermickie.odablock.sounds;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
@@ -33,7 +32,7 @@ public class GemstoneCrabBurrow {
 	public boolean onChatMessage(ChatMessage chatMessage) {
 		if (config.gemstoneCrabBurrow() &&
 				chatMessage.getMessage().contains(GEMSTONE_CRAB_DEATH_MESSAGE)) {
-			soundEngine.playClip(Sound.GEMSTONE_CRAB_BURROW, SoundOverrideAction.GEMSTONE_CRAB_BURROW, executor);
+			soundEngine.playClip(Sound.GEMSTONE_CRAB_BURROW, executor);
 			return true;
 		}
 		return false;

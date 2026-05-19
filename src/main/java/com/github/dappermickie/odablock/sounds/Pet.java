@@ -3,7 +3,6 @@ package com.github.dappermickie.odablock.sounds;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -48,7 +47,7 @@ public class Pet
 			chatMessage.getType() == ChatMessageType.GAMEMESSAGE)
 		{
 			receivedPetTick = client.getTickCount();
-			soundEngine.playClip(Sound.NEW_PET, SoundOverrideAction.NEW_PET, executor);
+			soundEngine.playClip(Sound.NEW_PET, executor);
 			return true;
 		}
 

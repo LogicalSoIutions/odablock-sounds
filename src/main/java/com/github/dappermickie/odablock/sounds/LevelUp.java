@@ -3,7 +3,6 @@ package com.github.dappermickie.odablock.sounds;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
@@ -94,11 +93,11 @@ public class LevelUp
 
 			if (justMaxed)
 			{
-				soundEngine.playClip(Sound.BIG_GMON, SoundOverrideAction.MAX_TOTAL_LEVEL, executor);
+				soundEngine.playClip(Sound.BIG_GMON, executor);
 			}
 			else
 			{
-				soundEngine.playClip(Sound.REGULAR_GAMON, SoundOverrideAction.LEVEL_99, executor);
+				soundEngine.playClip(Sound.REGULAR_GAMON, executor);
 			}
 			return;
 		}
@@ -109,7 +108,7 @@ public class LevelUp
 			{
 				client.addChatMessage(ChatMessageType.PUBLICCHAT, ODABLOCK, message, null);
 			}
-			soundEngine.playClip(Sound.LEVEL_UP, SoundOverrideAction.LEVEL_UP, executor);
+			soundEngine.playClip(Sound.LEVEL_UP, executor);
 		}
 	}
 

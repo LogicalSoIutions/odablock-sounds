@@ -4,7 +4,6 @@ import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.OdablockPlugin;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
@@ -53,7 +52,7 @@ public class PetDog
 			// Check if last pet dog click is within 15 ticks
 			if (lastPetDogTick == -1 || currentTick - lastPetDogTick < 15)
 			{
-				soundEngine.playClip(Sound.PETTING_DOG, SoundOverrideAction.PET_DOG, executor);
+				soundEngine.playClip(Sound.PETTING_DOG, executor);
 				return true;
 			}
 		}

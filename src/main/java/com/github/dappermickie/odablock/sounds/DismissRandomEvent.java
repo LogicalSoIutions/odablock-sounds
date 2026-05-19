@@ -3,7 +3,6 @@ package com.github.dappermickie.odablock.sounds;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.MenuOptionClicked;
@@ -43,7 +42,7 @@ public class DismissRandomEvent
 		// Dismiss random event
 		if (config.dismissRandomEvent() && option.equals(optionText) && widgetId != runePouchWidgetId && widgetId != lootingBagWidgetId && widgetId != chuggingBarrelWidgetId)
 		{
-			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, SoundOverrideAction.DISMISS_RANDOM_EVENT, executor);
+			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, executor);
 		}
 	}
 }

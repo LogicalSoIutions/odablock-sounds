@@ -3,7 +3,6 @@ package com.github.dappermickie.odablock.sounds;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.ChatMessage;
@@ -31,7 +30,7 @@ public class PhoenixNecklace {
 		if (config.phoenixNecklace() &&
 				chatMessage.getMessage()
 						.contains("Your phoenix necklace heals you, but is destroyed in the process.")) {
-			soundEngine.playClip(Sound.PHOENIX_NECKLACE, SoundOverrideAction.PHOENIX_NECKLACE, executor);
+			soundEngine.playClip(Sound.PHOENIX_NECKLACE, executor);
 			return true;
 		}
 		return false;

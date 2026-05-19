@@ -103,6 +103,8 @@ public enum Sound
 	PHOENIX_NECKLACE("phoenixnecklace", "PhoenixNecklace.wav"),
 	GEMSTONE_CRAB_BURROW("gemstonecrabburrow", "GemstoneCrabBurrow.wav"),
 
+	LIVESTREAM("livestream", "Livestream.wav"),
+
 	WARRIOR("warriors", "odablock_warriors.wav");
 
 	private final String resourceName;

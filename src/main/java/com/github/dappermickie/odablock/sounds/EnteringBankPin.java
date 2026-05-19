@@ -4,7 +4,6 @@ import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
 import com.github.dappermickie.odablock.SoundIds;
-import com.github.dappermickie.odablock.overrides.SoundOverrideAction;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Player;
@@ -40,7 +39,7 @@ public class EnteringBankPin
 			if (soundId == SoundIds.BANK_PIN.Id)
 			{
 				event.consume();
-				soundEngine.playClip(Sound.TYPING_IN_BANKPIN, SoundOverrideAction.BANK_PIN, executor);
+				soundEngine.playClip(Sound.TYPING_IN_BANKPIN, executor);
 				return;
 			}
 		}

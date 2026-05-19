@@ -325,7 +325,7 @@ public interface OdablockConfig extends Config
 	@ConfigItem(
 		keyName = "announceLevel99",
 		name = "Level 99",
-		description = "Should Odablock play a sound when you reach level 99 in a skill? Uses Regular Gamon, or Big Gmon when that 99 completes max total level (2376). This replaces the standard level-up sound for that milestone.",
+		description = "Should Odablock play a sound when you reach level 99 in a skill? This replaces the standard level-up sound for that milestone.",
 		section = ACHIEVEMENTS_SECTION,
 		position = 43
 	)
@@ -335,11 +335,23 @@ public interface OdablockConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "announceMaxTotalLevel",
+		name = "Max Total Level",
+		description = "Should Odablock play a special sound when a level 99 completes max total level (2376)? When disabled, maxing uses the regular level 99 sound instead.",
+		section = ACHIEVEMENTS_SECTION,
+		position = 44
+	)
+	default boolean announceMaxTotalLevel()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "announceQuestCompletion",
 		name = "Quest Completions",
 		description = "Should Odablock announce when you complete a quest?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 44
+		position = 45
 	)
 	default boolean announceQuestCompletion()
 	{
@@ -351,7 +363,7 @@ public interface OdablockConfig extends Config
 		name = "New Collection Log Entry",
 		description = "Should Odablock announce when you fill in a new slot in your collection log? This relies on you having chat messages enabled in the game settings, including the popup option.",
 		section = ACHIEVEMENTS_SECTION,
-		position = 45
+		position = 46
 	)
 	default boolean announceCollectionLog()
 	{
@@ -363,7 +375,7 @@ public interface OdablockConfig extends Config
 		name = "Completed Achievement Diaries",
 		description = "Should Odablock announce when you complete a new achievement diary?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 46
+		position = 47
 	)
 	default boolean announceAchievementDiary()
 	{
@@ -375,7 +387,7 @@ public interface OdablockConfig extends Config
 		name = "Completed Combat Achievement Tasks",
 		description = "Should Odablock announce when you complete a new combat achievement task?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 47
+		position = 48
 	)
 	default boolean announceCombatAchievement()
 	{
@@ -387,7 +399,7 @@ public interface OdablockConfig extends Config
 		name = "When You Die",
 		description = "Should Odablock say something when you die?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 48
+		position = 49
 	)
 	default boolean announceDeath()
 	{
@@ -399,7 +411,7 @@ public interface OdablockConfig extends Config
 		name = "Received Pet",
 		description = "Should Odablock say something whenever you receive a pet?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 49
+		position = 50
 	)
 	default boolean receivedPet()
 	{
@@ -411,7 +423,7 @@ public interface OdablockConfig extends Config
 		name = "Killing Rat or Scurrius",
 		description = "Should Odablock say something whenever you kill a rat or Scurrius?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 50
+		position = 51
 	)
 	default boolean killingRat()
 	{
@@ -423,7 +435,7 @@ public interface OdablockConfig extends Config
 		name = "Gemstone Crab Burrow",
 		description = "Should Odablock say something when the gemstone crab burrows away?",
 		section = ACHIEVEMENTS_SECTION,
-		position = 51
+		position = 52
 	)
 	default boolean gemstoneCrabBurrow()
 	{

@@ -80,18 +80,19 @@ public class LevelUp
 			final boolean justMaxed = totalLevelBefore >= 0
 				&& totalLevelBefore < MAX_TOTAL_LEVEL
 				&& totalLevelAfter >= MAX_TOTAL_LEVEL;
+			final boolean announceMaxTotalLevel = justMaxed && config.announceMaxTotalLevel();
 
 			if (config.showChatMessages())
 			{
 				client.addChatMessage(
 					ChatMessageType.PUBLICCHAT,
 					ODABLOCK,
-					justMaxed ? maxTotalLevelMessage : level99Message,
+					announceMaxTotalLevel ? maxTotalLevelMessage : level99Message,
 					null
 				);
 			}
 
-			if (justMaxed)
+			if (announceMaxTotalLevel)
 			{
 				soundEngine.playClip(Sound.BIG_GMON, executor);
 			}

@@ -6,6 +6,7 @@ import com.github.dappermickie.odablock.SoundEngine;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.gameval.NpcID;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,7 +41,7 @@ public class DismissRandomEvent
 		int widgetId = widget == null ? -1 : widget.getId();
 		String option = menuOptionClicked.getMenuOption();
 		// Dismiss random event
-		if (config.dismissRandomEvent() && option.equals(optionText) && widgetId != runePouchWidgetId && widgetId != lootingBagWidgetId && widgetId != chuggingBarrelWidgetId)
+		if (config.dismissRandomEvent() && option.equals(optionText) && widgetId != runePouchWidgetId && widgetId != lootingBagWidgetId && widgetId != chuggingBarrelWidgetId && menuOptionClicked.getId() != NpcID.MACRO_SANDWICH_LADY_NPC)
 		{
 			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, executor);
 		}

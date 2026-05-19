@@ -173,7 +173,7 @@ public final class SoundPools
 		names.put("welcomescreen", "Welcome Screen");
 		names.put("crypt", "Crypt (Dharok Barrows)");
 		names.put("freeze", "Freeze");
-		names.put("seryna", "Seryna");
+		names.put("serynadismiss", "Dismiss Seryna");
 		names.put("warriors", "Odablock Warriors");
 		names.put("clientdisconnects", "Client Disconnects");
 		return Collections.unmodifiableMap(names);

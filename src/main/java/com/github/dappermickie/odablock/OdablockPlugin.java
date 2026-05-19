@@ -520,6 +520,7 @@ public class OdablockPlugin extends Plugin
 		turnOnRun.onMenuOptionClicked(menuOptionClicked);
 		reportPlayer.onMenuOptionClicked(menuOptionClicked);
 		declineTrade.onMenuOptionClicked(menuOptionClicked);
+		serynaSound.onMenuOptionClicked(menuOptionClicked);
 		dismissRandomEvent.onMenuOptionClicked(menuOptionClicked);
 		odablockWarriors.onMenuOptionClicked(menuOptionClicked);
 	}
@@ -585,7 +586,6 @@ public class OdablockPlugin extends Plugin
 	public void onInteractingChanged(InteractingChanged event)
 	{
 		killingRat.onInteractingChanged(event);
-		serynaSound.onInteractingChanged(event);
 	}
 
 	@Subscribe

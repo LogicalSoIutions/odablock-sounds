@@ -7,20 +7,13 @@ import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Actor;
-import net.runelite.api.Client;
-import net.runelite.api.NPC;
-import  net.runelite.api.gameval.NpcID;
-import net.runelite.api.Player;
-import net.runelite.api.events.InteractingChanged;
+import net.runelite.api.events.MenuOptionClicked;
+import net.runelite.api.gameval.NpcID;
 
 @Singleton
 @Slf4j
 public class SerynaSound
 {
-	@Inject
-	private Client client;
-
 	@Inject
 	private SoundEngine soundEngine;
 
@@ -30,35 +23,25 @@ public class SerynaSound
 	@Inject
 	private OdablockConfig config;
 
-	private static final int RANDOM_EVENT_TIMEOUT = 150;
-	private int lastNotificationTick = -RANDOM_EVENT_TIMEOUT; // to avoid double notifications
+	private static final String DISMISS_OPTION = "Dismiss";
 
-	public void onInteractingChanged(InteractingChanged event)
+	public void onMenuOptionClicked(MenuOptionClicked menuOptionClicked)
 	{
-		if (!config.serynaSound()) {
-			return;
-		}
-
-		Actor source = event.getSource();
-		Actor target = event.getTarget();
-		Player player = client.getLocalPlayer();
-
-		// Check that the npc is interacting with the player and the player isn't interacting with the npc, so
-		// that the notification doesn't fire from talking to other user's randoms
-		if (player == null
-			|| target != player
-			|| player.getInteracting() == source
-			|| !(source instanceof NPC)
-			|| ((NPC) source).getId() != NpcID.MACRO_SANDWICH_LADY_NPC)
+		if (!config.serynaSound())
 		{
 			return;
 		}
 
-		if (client.getTickCount() - lastNotificationTick > RANDOM_EVENT_TIMEOUT)
+		if (!DISMISS_OPTION.equals(menuOptionClicked.getMenuOption()))
 		{
-			lastNotificationTick = client.getTickCount();
-
-			soundEngine.playClip(Sound.SERYNA_SOUND, executor);
+			return;
 		}
+
+		if (menuOptionClicked.getId() != NpcID.MACRO_SANDWICH_LADY_NPC)
+		{
+			return;
+		}
+
+		soundEngine.playClip(Sound.SERYNA_DISMISS, executor);
 	}
 }

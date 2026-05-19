@@ -561,8 +561,8 @@ public interface OdablockConfig extends Config
 
 	@ConfigItem(
 		keyName = "serynaSound",
-		name = "Seryna Sound",
-		description = "Do you want to play the 'Inshallah I will eat in 1 hour' sound when the sandwich lady spawns?",
+		name = "Dismiss Seryna",
+		description = "Should Odablock play a custom sound when you dismiss the sandwich lady?",
 		section = INTERACTIONS_SECTION,
 		position = 60
 	)

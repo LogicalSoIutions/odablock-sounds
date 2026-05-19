@@ -99,7 +99,7 @@ public enum Sound
 	FREEZE("freeze", "Freeze.wav"),
 	CRYPT("crypt", "Crypt.wav"),
 	WELCOME_SCREEN_SOUND("welcomescreen", "WelcomeScreen.wav"),
-	SERYNA_SOUND("seryna", "Seryna.wav"),
+	SERYNA_DISMISS("serynadismiss", "SerynaDismiss.wav"),
 	PHOENIX_NECKLACE("phoenixnecklace", "PhoenixNecklace.wav"),
 	GEMSTONE_CRAB_BURROW("gemstonecrabburrow", "GemstoneCrabBurrow.wav"),
 

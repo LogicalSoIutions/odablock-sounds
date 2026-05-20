@@ -48,6 +48,7 @@ public enum Sound
 
 	DISMISSING_RANDOM_EVENT("dismissrandomevent", "DismissingRandomEvent.wav"),//#20
 	GETTING_RAGGED("gettingragged", "GettingRagged.wav"),
+	GETTING_RAGGED_2("gettingragged", "GettingRagged_r2.wav"),
 	TYPING_IN_BANKPIN("typingbankpin", "TypingInBankpin.wav"),//#21
 	CLIENT_DISCONNECTS("clientdisconnects", "ClientDisconnects.wav"),//#22
 	TOA_CHEST_OPENS("toachestopens", "ToaChestOpens.wav"),//#23

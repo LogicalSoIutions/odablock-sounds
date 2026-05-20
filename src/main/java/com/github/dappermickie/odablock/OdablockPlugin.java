@@ -17,6 +17,7 @@ import com.github.dappermickie.odablock.sounds.Death;
 import com.github.dappermickie.odablock.sounds.DeclineTrade;
 import com.github.dappermickie.odablock.sounds.DhAxe;
 import com.github.dappermickie.odablock.sounds.DismissRandomEvent;
+import com.github.dappermickie.odablock.sounds.EmptyChestSound;
 import com.github.dappermickie.odablock.sounds.EnteringBankPin;
 import com.github.dappermickie.odablock.sounds.FreezeSound;
 import com.github.dappermickie.odablock.sounds.GemstoneCrabBurrow;
@@ -247,6 +248,9 @@ public class OdablockPlugin extends Plugin
 
 	@Inject
 	private GemstoneCrabBurrow gemstoneCrabBurrow;
+
+	@Inject
+	private EmptyChestSound emptyChestSound;
 	// End of sound injections
 
 	@Inject
@@ -536,6 +540,7 @@ public class OdablockPlugin extends Plugin
 
 		hairDresser.onWidgetLoaded(event);
 		pkChest.onWidgetLoaded(event);
+		emptyChestSound.onWidgetLoaded(event);
 		odablockWarriors.onWidgetLoaded(event);
 		welcomeScreen.onWidgetLoaded(event);
 	}

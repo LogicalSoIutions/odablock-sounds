@@ -78,8 +78,6 @@ public final class SoundPools
 		Map<String, String> legacy = new LinkedHashMap<>();
 		legacy.put("death", "death");
 		legacy.put("levelUp", "levelup");
-		legacy.put("level99", "regulargamon");
-		legacy.put("maxTotalLevel", "biggmon");
 		legacy.put("collectionLog", "collectionlog");
 		legacy.put("questCompleted", "quest");
 		legacy.put("combatAchievement", "combattask");
@@ -117,11 +115,6 @@ public final class SoundPools
 		legacy.put("hairdresser", "hairdresser");
 		legacy.put("snowballed", "snowball");
 		legacy.put("killingRat", "killingrat");
-		legacy.put("spellbookSwap", "spellbookswap");
-		legacy.put("notificationAlert", "odasalert");
-		legacy.put("livestreamGoLive", "livestream");
-		legacy.put("phoenixNecklace", "phoenixnecklace");
-		legacy.put("gemstoneCrabBurrow", "gemstonecrabburrow");
 		return Collections.unmodifiableMap(legacy);
 	}
 
@@ -170,6 +163,7 @@ public final class SoundPools
 		names.put("livestream", "Livestream Go Live");
 		names.put("phoenixnecklace", "Phoenix Necklace");
 		names.put("gemstonecrabburrow", "Gemstone Crab Burrow");
+		names.put("fahhhhh", "Empty Barrows / Moons Chest");
 		names.put("welcomescreen", "Welcome Screen");
 		names.put("crypt", "Crypt (Dharok Barrows)");
 		names.put("freeze", "Freeze");

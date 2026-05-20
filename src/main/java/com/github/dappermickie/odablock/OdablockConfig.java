@@ -287,6 +287,18 @@ public interface OdablockConfig extends Config
 		return true;
 	}
 
+	@ConfigItem(
+		keyName = "emptyChestSound",
+		name = "Empty Barrows / Moons Chest",
+		description = "Do you want to play 'Fahhhhh' when you open a Barrows or Moons chest with no unique loot?",
+		section = PVP_SECTION,
+		position = 37
+	)
+	default boolean emptyChestSound()
+	{
+		return true;
+	}
+
 	// =========================================================================
 	// Achievements & Milestones
 	// =========================================================================

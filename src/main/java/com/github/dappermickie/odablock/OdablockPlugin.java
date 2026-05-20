@@ -31,6 +31,7 @@ import com.github.dappermickie.odablock.sounds.Pet;
 import com.github.dappermickie.odablock.sounds.PetDog;
 import com.github.dappermickie.odablock.sounds.PkChest;
 import com.github.dappermickie.odablock.sounds.PrayerDown;
+import com.github.dappermickie.odablock.sounds.RandomEventSpawned;
 import com.github.dappermickie.odablock.sounds.QuestCompleted;
 import com.github.dappermickie.odablock.sounds.RedemptionProc;
 import com.github.dappermickie.odablock.sounds.ReportPlayer;
@@ -73,6 +74,7 @@ import net.runelite.api.events.GameTick;
 import net.runelite.api.events.InteractingChanged;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.NpcDespawned;
+import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.events.OverheadTextChanged;
 import net.runelite.api.events.PlayerDespawned;
 import net.runelite.api.events.PlayerSpawned;
@@ -251,6 +253,9 @@ public class OdablockPlugin extends Plugin
 
 	@Inject
 	private EmptyChestSound emptyChestSound;
+
+	@Inject
+	private RandomEventSpawned randomEventSpawned;
 	// End of sound injections
 
 	@Inject
@@ -561,6 +566,12 @@ public class OdablockPlugin extends Plugin
 	public void onNpcDespawned(NpcDespawned npcDespawned)
 	{
 		killingRat.onNpcDespawned(npcDespawned);
+	}
+
+	@Subscribe
+	public void onNpcSpawned(NpcSpawned npcSpawned)
+	{
+		randomEventSpawned.onNpcSpawned(npcSpawned);
 	}
 
 	@Subscribe

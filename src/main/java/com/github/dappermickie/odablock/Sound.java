@@ -47,6 +47,7 @@ public enum Sound
 	KILLING_RAT_OR_SCURRIUS_2("killingrat", "KillingRatOrScurrius_r2.wav"),//#18
 
 	DISMISSING_RANDOM_EVENT("dismissrandomevent", "DismissingRandomEvent.wav"),//#20
+	GETTING_RAGGED("gettingragged", "GettingRagged.wav"),
 	TYPING_IN_BANKPIN("typingbankpin", "TypingInBankpin.wav"),//#21
 	CLIENT_DISCONNECTS("clientdisconnects", "ClientDisconnects.wav"),//#22
 	TOA_CHEST_OPENS("toachestopens", "ToaChestOpens.wav"),//#23

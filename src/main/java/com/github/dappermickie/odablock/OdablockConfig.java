@@ -502,11 +502,23 @@ public interface OdablockConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "randomEventSpawned",
+		name = "Random Event Spawned",
+		description = "Should Odablock say 'Getting Ragged' when a random event NPC spawns for you?",
+		section = INTERACTIONS_SECTION,
+		position = 54
+	)
+	default boolean randomEventSpawned()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "phoenixNecklace",
 		name = "Phoenix Necklace",
 		description = "Should Odablock say something when your phoenix necklace breaks?",
 		section = INTERACTIONS_SECTION,
-		position = 54
+		position = 55
 	)
 	default boolean phoenixNecklace()
 	{
@@ -518,7 +530,7 @@ public interface OdablockConfig extends Config
 		name = "Pet the Dog",
 		description = "Should Stella say 'Who's a good little zoggy!' when you pet the dog?",
 		section = INTERACTIONS_SECTION,
-		position = 54
+		position = 56
 	)
 	default boolean petDog()
 	{
@@ -530,7 +542,7 @@ public interface OdablockConfig extends Config
 		name = "Give Bone",
 		description = "Should Stella say something whenever you give a bone to a dog?",
 		section = INTERACTIONS_SECTION,
-		position = 55
+		position = 57
 	)
 	default boolean giveBone()
 	{
@@ -542,7 +554,7 @@ public interface OdablockConfig extends Config
 		name = "Hairdresser",
 		description = "Should Odablock say something whenever you open the hairdresser interface in Falador?",
 		section = INTERACTIONS_SECTION,
-		position = 56
+		position = 58
 	)
 	default boolean hairDresser()
 	{
@@ -554,7 +566,7 @@ public interface OdablockConfig extends Config
 		name = "Turn on Run",
 		description = "Should Odablock say 'FAST! I said FAST!' when you turn your run on?",
 		section = INTERACTIONS_SECTION,
-		position = 57
+		position = 59
 	)
 	default boolean turnOnRun()
 	{
@@ -566,7 +578,7 @@ public interface OdablockConfig extends Config
 		name = "Bank PIN",
 		description = "Should Odablock make the 'ai ai ai ai' sound when you type in your bank PIN?",
 		section = INTERACTIONS_SECTION,
-		position = 58
+		position = 60
 	)
 	default boolean bankPin()
 	{
@@ -578,7 +590,7 @@ public interface OdablockConfig extends Config
 		name = "Spellbook Swap",
 		description = "Should Odablock say something whenever you swap your spellbook? (Magic Cape, Max Cape, Lunar spell, or POH altar)",
 		section = INTERACTIONS_SECTION,
-		position = 59
+		position = 61
 	)
 	default boolean spellbookSwap()
 	{
@@ -590,7 +602,7 @@ public interface OdablockConfig extends Config
 		name = "Dismiss Seryna",
 		description = "Should Odablock play a custom sound when you dismiss the sandwich lady?",
 		section = INTERACTIONS_SECTION,
-		position = 60
+		position = 62
 	)
 	default boolean serynaSound()
 	{

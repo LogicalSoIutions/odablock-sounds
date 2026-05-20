@@ -30,6 +30,9 @@ public class DismissRandomEvent
 	@Inject
 	private ScheduledExecutorService executor;
 
+	@Inject
+	private RandomEventSpawned randomEventSpawned;
+
 	private static final String optionText = "Dismiss";
 	private static final int runePouchWidgetId = 983062;
 	private static final int lootingBagWidgetId = 983048;
@@ -41,7 +44,13 @@ public class DismissRandomEvent
 		int widgetId = widget == null ? -1 : widget.getId();
 		String option = menuOptionClicked.getMenuOption();
 		// Dismiss random event
-		if (config.dismissRandomEvent() && option.equals(optionText) && widgetId != runePouchWidgetId && widgetId != lootingBagWidgetId && widgetId != chuggingBarrelWidgetId && menuOptionClicked.getId() != NpcID.MACRO_SANDWICH_LADY_NPC)
+		if (config.dismissRandomEvent()
+			&& option.equals(optionText)
+			&& widgetId != runePouchWidgetId
+			&& widgetId != lootingBagWidgetId
+			&& widgetId != chuggingBarrelWidgetId
+			&& menuOptionClicked.getId() != NpcID.MACRO_SANDWICH_LADY_NPC
+			&& randomEventSpawned.isRandomEventNpcId(menuOptionClicked.getId()))
 		{
 			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, executor);
 		}

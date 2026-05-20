@@ -134,6 +134,7 @@ public final class SoundPools
 		names.put("accepttrade", "Accept Trade");
 		names.put("declinetrade", "Decline Trade");
 		names.put("dismissrandomevent", "Dismiss Random Event");
+		names.put("gettingragged", "Getting Ragged");
 		names.put("vengeance", "Vengeance");
 		names.put("playerkilling", "Killing Player");
 		names.put("reportplayer", "Report Player");

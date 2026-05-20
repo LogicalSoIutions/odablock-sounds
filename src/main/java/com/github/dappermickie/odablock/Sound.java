@@ -103,7 +103,6 @@ public enum Sound
 	WELCOME_SCREEN_SOUND("welcomescreen", "WelcomeScreen.wav"),
 	SERYNA_DISMISS("serynadismiss", "SerynaDismiss.wav"),
 	PHOENIX_NECKLACE("phoenixnecklace", "PhoenixNecklace.wav"),
-	GEMSTONE_CRAB_BURROW("gemstonecrabburrow", "GemstoneCrabBurrow.wav"),
 	FAHHHHH("fahhhhh", "Fahhhhh.wav"),
 
 	LIVESTREAM("livestream", "Livestream.wav"),

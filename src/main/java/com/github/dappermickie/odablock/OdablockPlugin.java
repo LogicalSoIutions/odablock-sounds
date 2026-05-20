@@ -20,7 +20,6 @@ import com.github.dappermickie.odablock.sounds.DismissRandomEvent;
 import com.github.dappermickie.odablock.sounds.EmptyChestSound;
 import com.github.dappermickie.odablock.sounds.EnteringBankPin;
 import com.github.dappermickie.odablock.sounds.FreezeSound;
-import com.github.dappermickie.odablock.sounds.GemstoneCrabBurrow;
 import com.github.dappermickie.odablock.sounds.GiveBone;
 import com.github.dappermickie.odablock.sounds.HairDresser;
 import com.github.dappermickie.odablock.sounds.KillingPlayer;
@@ -247,9 +246,6 @@ public class OdablockPlugin extends Plugin
 
 	@Inject
 	private com.github.dappermickie.odablock.sounds.PhoenixNecklace phoenixNecklace;
-
-	@Inject
-	private GemstoneCrabBurrow gemstoneCrabBurrow;
 
 	@Inject
 	private EmptyChestSound emptyChestSound;
@@ -485,10 +481,6 @@ public class OdablockPlugin extends Plugin
 			return;
 		}
 		else if (phoenixNecklace.onChatMessage(chatMessage))
-		{
-			return;
-		}
-		else if (gemstoneCrabBurrow.onChatMessage(chatMessage))
 		{
 			return;
 		}

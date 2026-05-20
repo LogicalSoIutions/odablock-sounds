@@ -442,18 +442,6 @@ public interface OdablockConfig extends Config
 		return true;
 	}
 
-	@ConfigItem(
-		keyName = "gemstoneCrabBurrow",
-		name = "Gemstone Crab Burrow",
-		description = "Should Odablock say something when the gemstone crab burrows away?",
-		section = ACHIEVEMENTS_SECTION,
-		position = 52
-	)
-	default boolean gemstoneCrabBurrow()
-	{
-		return true;
-	}
-
 	// =========================================================================
 	// Trades & Interactions
 	// =========================================================================

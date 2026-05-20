@@ -163,7 +163,6 @@ public final class SoundPools
 		names.put("odasalert", "Notification Alert");
 		names.put("livestream", "Livestream Go Live");
 		names.put("phoenixnecklace", "Phoenix Necklace");
-		names.put("gemstonecrabburrow", "Gemstone Crab Burrow");
 		names.put("fahhhhh", "Empty Barrows / Moons Chest");
 		names.put("welcomescreen", "Welcome Screen");
 		names.put("crypt", "Crypt (Dharok Barrows)");

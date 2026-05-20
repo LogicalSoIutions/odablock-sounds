@@ -95,6 +95,7 @@ public enum Sound
 	SPELLBOOK_SWAP_1("spellbookswap", "SpellbookSwap_r1.wav"),
 	SPELLBOOK_SWAP_2("spellbookswap", "SpellbookSwap_r2.wav"),
 	SPELLBOOK_SWAP_3("spellbookswap", "SpellbookSwap_r3.wav"),
+	SPELLBOOK_SWAP_4("spellbookswap", "SpellbookSwap_r4.wav"),
 
 	ODAS_ALERT("odasalert", "OdasAlert.wav"),
 

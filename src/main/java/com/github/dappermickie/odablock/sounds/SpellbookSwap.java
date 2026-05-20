@@ -16,6 +16,10 @@ import net.runelite.api.events.VarbitChanged;
 public class SpellbookSwap
 {
 	private static final int SPELLBOOK_VARBIT = 4070;
+	private static final int SPELLBOOK_STANDARD = 0;
+	private static final int SPELLBOOK_ANCIENT = 1;
+	private static final int SPELLBOOK_LUNAR = 2;
+	private static final int SPELLBOOK_ARCEUUS = 3;
 
 	@Inject
 	private Client client;
@@ -73,6 +77,29 @@ public class SpellbookSwap
 			return;
 		}
 
-		soundEngine.playClip(Sound.SPELLBOOK_SWAP_1, executor);
+		final Sound sound = getSoundForSpellbook(newSpellbook);
+		if (sound == null)
+		{
+			return;
+		}
+
+		soundEngine.playClip(sound, executor);
+	}
+
+	private Sound getSoundForSpellbook(final int spellbook)
+	{
+		switch (spellbook)
+		{
+			case SPELLBOOK_STANDARD:
+				return Sound.SPELLBOOK_SWAP_4;
+			case SPELLBOOK_ANCIENT:
+				return Sound.SPELLBOOK_SWAP_1;
+			case SPELLBOOK_LUNAR:
+				return Sound.SPELLBOOK_SWAP_2;
+			case SPELLBOOK_ARCEUUS:
+				return Sound.SPELLBOOK_SWAP_3;
+			default:
+				return null;
+		}
 	}
 }

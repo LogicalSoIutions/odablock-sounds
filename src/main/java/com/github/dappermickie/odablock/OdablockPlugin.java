@@ -383,6 +383,7 @@ public class OdablockPlugin extends Plugin
 			case LOGGING_IN:
 			case LOGIN_SCREEN_AUTHENTICATOR:
 				levelUp.clear();
+				levelUp.setLastLoginTick(-1);
 				achievementDiaries.clearOldAchievementDiaries();
 			case CONNECTION_LOST:
 				// set to -1 here in-case of race condition with varbits changing before this handler is called
@@ -398,6 +399,8 @@ public class OdablockPlugin extends Plugin
 				break;
 			case LOGGED_IN:
 				final int currentTick = client.getTickCount();
+				levelUp.setOldExperience();
+				levelUp.setLastLoginTick(currentTick);
 				achievementDiaries.setLastLoginTick(currentTick);
 				prayerDown.setLastLoginTick(currentTick);
 				spellbookSwap.setLastLoginTick(currentTick);

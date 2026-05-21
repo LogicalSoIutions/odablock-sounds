@@ -39,9 +39,11 @@ public class LevelUp
 	private static final String message = "Level up: completed.";
 	private static final String level99Message = "Level 99: completed.";
 	private static final String maxTotalLevelMessage = "Max total level: completed.";
+	private static final int LOGIN_STAT_SYNC_TICK_GRACE = 1;
 
 	private final Map<Skill, Integer> oldExperience = new EnumMap<>(Skill.class);
 	private int oldTotalLevel = -1;
+	private int lastLoginTick = -1;
 
 	public void onStatChanged(StatChanged statChanged)
 	{
@@ -52,8 +54,18 @@ public class LevelUp
 		final int levelAfter = Experience.getLevelForXp(xpAfter);
 		final int xpBefore = oldExperience.getOrDefault(skill, -1);
 		final int levelBefore = xpBefore == -1 ? -1 : Experience.getLevelForXp(xpBefore);
+		final int totalLevelBefore = oldTotalLevel;
+		final int totalLevelAfter = client.getTotalLevel();
 
 		oldExperience.put(skill, xpAfter);
+		oldTotalLevel = totalLevelAfter;
+
+		// Ignore the login stat sync window. During this period, the client can report
+		// transient stat values that would otherwise look like massive level jumps.
+		if (lastLoginTick >= 0 && client.getTickCount() <= lastLoginTick + LOGIN_STAT_SYNC_TICK_GRACE)
+		{
+			return;
+		}
 
 		// Do not proceed if any of the following are true:
 		//  * xpBefore == -1              (don't fire when first setting new known value)
@@ -73,10 +85,6 @@ public class LevelUp
 
 		if (justReached99 && config.announceLevel99())
 		{
-			final int totalLevelAfter = client.getTotalLevel();
-			final int totalLevelBefore = oldTotalLevel;
-			oldTotalLevel = totalLevelAfter;
-
 			final boolean justMaxed = totalLevelBefore >= 0
 				&& totalLevelBefore < MAX_TOTAL_LEVEL
 				&& totalLevelAfter >= MAX_TOTAL_LEVEL;
@@ -117,6 +125,7 @@ public class LevelUp
 	{
 		oldExperience.clear();
 		oldTotalLevel = -1;
+		lastLoginTick = -1;
 	}
 
 	public void setOldExperience()
@@ -126,5 +135,10 @@ public class LevelUp
 			oldExperience.put(skill, client.getSkillExperience(skill));
 		}
 		oldTotalLevel = client.getTotalLevel();
+	}
+
+	public void setLastLoginTick(int tick)
+	{
+		lastLoginTick = tick;
 	}
 }

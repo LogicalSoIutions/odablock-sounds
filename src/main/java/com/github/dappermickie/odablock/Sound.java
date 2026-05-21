@@ -29,9 +29,7 @@ public enum Sound
 	//HIT_BY_KEPHRI("holykephri", "HitByKephri.wav"),//#14
 
 	COMBAT_TASK("combattask", "CombatTaskCompleted_r1.wav"),//#15
-	COMBAT_TASK_2("combattask", "CombatTaskCompleted_r2.wav"),//#15
-	COMBAT_TASK_3("combattask", "CombatTaskCompleted_r3.wav"),//#15
-	COMBAT_TASK_4("combattask", "CombatTaskCompleted_r4.wav"),//#15
+
 
 	DDS_SPEC("ddsspec", "DdsSpec_r1.wav"),//#16
 	DDS_SPEC_2("ddsspec", "DdsSpec_r2.wav"),//#16
@@ -47,8 +45,7 @@ public enum Sound
 	KILLING_RAT_OR_SCURRIUS_2("killingrat", "KillingRatOrScurrius_r2.wav"),//#18
 
 	DISMISSING_RANDOM_EVENT("dismissrandomevent", "DismissingRandomEvent.wav"),//#20
-	GETTING_RAGGED("gettingragged", "GettingRagged.wav"),
-	GETTING_RAGGED_2("gettingragged", "GettingRagged_r2.wav"),
+	GETTING_RAGGED("gettingragged", "GettingRagged_r2.wav"),
 	TYPING_IN_BANKPIN("typingbankpin", "TypingInBankpin.wav"),//#21
 	CLIENT_DISCONNECTS("clientdisconnects", "ClientDisconnects.wav"),//#22
 	TOA_CHEST_OPENS("toachestopens", "ToaChestOpens.wav"),//#23

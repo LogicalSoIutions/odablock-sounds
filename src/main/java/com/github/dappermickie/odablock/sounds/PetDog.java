@@ -1,7 +1,6 @@
 package com.github.dappermickie.odablock.sounds;
 
 import com.github.dappermickie.odablock.OdablockConfig;
-import com.github.dappermickie.odablock.OdablockPlugin;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
 import lombok.extern.slf4j.Slf4j;
@@ -10,9 +9,7 @@ import net.runelite.api.MenuAction;
 import net.runelite.api.Player;
 import net.runelite.api.events.ChatMessage;
 import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.util.Text;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.concurrent.ScheduledExecutorService;

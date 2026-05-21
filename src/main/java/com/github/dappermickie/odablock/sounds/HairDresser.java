@@ -1,10 +1,8 @@
 package com.github.dappermickie.odablock.sounds;
 
 import com.github.dappermickie.odablock.OdablockConfig;
-import com.github.dappermickie.odablock.RandomSoundUtility;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;

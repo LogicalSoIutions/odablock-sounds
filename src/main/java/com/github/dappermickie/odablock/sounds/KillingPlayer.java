@@ -15,7 +15,6 @@ import net.runelite.client.util.Text;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Random;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.regex.Pattern;
 

@@ -1,7 +1,6 @@
 package com.github.dappermickie.odablock.sounds;
 
 import com.github.dappermickie.odablock.OdablockConfig;
-import static com.github.dappermickie.odablock.OdablockPlugin.ODABLOCK;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
 import java.util.concurrent.ScheduledExecutorService;

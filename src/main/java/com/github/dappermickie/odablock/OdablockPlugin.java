@@ -47,7 +47,6 @@ import com.github.dappermickie.odablock.sounds.ZebakRoar;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;

@@ -7,8 +7,6 @@ import net.runelite.api.Client;
 import net.runelite.api.MenuAction;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.VarbitChanged;
-import net.runelite.client.eventbus.Subscribe;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.concurrent.ScheduledExecutorService;

@@ -1,11 +1,9 @@
 package com.github.dappermickie.odablock.sounds;
 
 import com.github.dappermickie.odablock.OdablockConfig;
-import com.github.dappermickie.odablock.RandomSoundUtility;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
 import com.github.dappermickie.odablock.SoundIds;
-import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;

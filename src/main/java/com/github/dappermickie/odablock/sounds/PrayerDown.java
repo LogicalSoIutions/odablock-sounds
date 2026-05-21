@@ -6,12 +6,9 @@ import com.github.dappermickie.odablock.SoundEngine;
 import com.github.dappermickie.odablock.SoundIds;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
-import net.runelite.api.Player;
 import net.runelite.api.Skill;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.SoundEffectPlayed;
-import net.runelite.client.eventbus.Subscribe;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.concurrent.ScheduledExecutorService;

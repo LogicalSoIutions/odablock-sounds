@@ -1,6 +1,5 @@
 package com.github.dappermickie.odablock;
 
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
@@ -20,15 +19,6 @@ public class DebugScripts
 
 	@Inject
 	private Client client;
-
-	@Inject
-	private OdablockConfig config;
-
-	@Inject
-	private SoundEngine soundEngine;
-
-	@Inject
-	private ScheduledExecutorService executor;
 
 	public void onMenuOptionClicked(MenuOptionClicked menuOptionClicked)
 	{

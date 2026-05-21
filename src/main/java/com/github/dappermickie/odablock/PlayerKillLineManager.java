@@ -1,14 +1,7 @@
 package com.github.dappermickie.odablock;
 
-import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.regex.Pattern;
-import net.runelite.client.RuneLite;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

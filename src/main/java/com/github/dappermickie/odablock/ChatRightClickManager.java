@@ -1,6 +1,5 @@
 package com.github.dappermickie.odablock;
 
-import com.github.dappermickie.odablock.notifications.Notification;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.ScriptEvent;
 import net.runelite.api.events.GameTick;
-import net.runelite.api.widgets.ComponentID;
 import net.runelite.api.widgets.JavaScriptCallback;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.callback.ClientThread;

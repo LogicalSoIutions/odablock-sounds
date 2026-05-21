@@ -492,7 +492,7 @@ public interface OdablockConfig extends Config
 	@ConfigItem(
 		keyName = "randomEventSpawned",
 		name = "Random Event Spawned",
-		description = "Should Odablock say 'Getting Ragged' when a random event NPC spawns for you?",
+		description = "Should Odablock play the 'Random Event Spawned' sound when a random event NPC spawns for you?",
 		section = INTERACTIONS_SECTION,
 		position = 54
 	)
@@ -586,13 +586,13 @@ public interface OdablockConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "serynaSound",
-		name = "Dismiss Seryna",
+		keyName = "sandwichLadySound",
+		name = "Dismiss Sandwich Lady",
 		description = "Should Odablock play a custom sound when you dismiss the sandwich lady?",
 		section = INTERACTIONS_SECTION,
 		position = 62
 	)
-	default boolean serynaSound()
+	default boolean sandwichLadySound()
 	{
 		return true;
 	}

@@ -613,6 +613,7 @@ public class OdablockPlugin extends Plugin
 		prayerDown.onGameTick(event);
 		tobChestLight.onGameTick(event);
 		coxSounds.onGameTick(event);
+		randomEventSpawned.onGameTick(event);
 		livestreamManager.onGameTick(event);
 		notificationManager.onGameTick(event);
 		chatRightClickManager.onGameTick(event);

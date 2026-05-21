@@ -3,20 +3,27 @@ package com.github.dappermickie.odablock.sounds;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Player;
-import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.Client;
+import net.runelite.api.NPC;
+import net.runelite.api.Player;
+import net.runelite.api.events.GameTick;
+import net.runelite.api.events.NpcSpawned;
 import net.runelite.api.gameval.NpcID;
 
 @Singleton
 @Slf4j
 public class RandomEventSpawned
 {
+	private static final int INTERACTION_CHECK_DELAY_TICKS = 3;
+
 	@Inject
 	private Client client;
 
@@ -64,6 +71,7 @@ public class RandomEventSpawned
 		NpcID.MACRO_COUNTCHECK_SURFACE,
 		NpcID.MACRO_COUNTCHECK_UNDERWATER
 	);
+	private final List<PendingRandomEventCheck> pendingChecks = new ArrayList<>();
 
 	public void onNpcSpawned(NpcSpawned npcSpawned)
 	{
@@ -72,24 +80,74 @@ public class RandomEventSpawned
 			return;
 		}
 
-		final int npcId = npcSpawned.getNpc().getId();
+		final NPC npc = npcSpawned.getNpc();
+		final int npcId = npc.getId();
 		if (!isRandomEventNpcId(npcId))
 		{
 			return;
 		}
 
-		final Player localPlayer = client.getLocalPlayer();
-		if (localPlayer == null || npcSpawned.getNpc().getInteracting() != localPlayer)
+		final int dueTick = client.getTickCount() + INTERACTION_CHECK_DELAY_TICKS;
+		pendingChecks.add(new PendingRandomEventCheck(npc, npcId, dueTick));
+	}
+
+	public void onGameTick(final GameTick gameTick)
+	{
+		if (pendingChecks.isEmpty())
 		{
 			return;
 		}
 
-		log.debug("Random event NPC spawned for local player: {}", npcId);
-		soundEngine.playClip(Sound.GETTING_RAGGED, executor);
+		if (!config.randomEventSpawned())
+		{
+			pendingChecks.clear();
+			return;
+		}
+
+		final int currentTick = client.getTickCount();
+		final Iterator<PendingRandomEventCheck> iterator = pendingChecks.iterator();
+		while (iterator.hasNext())
+		{
+			final PendingRandomEventCheck check = iterator.next();
+			if (currentTick >= check.dueTick)
+			{
+				verifyInteractionAndPlaySound(check.npc, check.npcId);
+				iterator.remove();
+			}
+		}
 	}
 
 	public boolean isRandomEventNpcId(final int npcId)
 	{
 		return RANDOM_EVENT_NPC_IDS.contains(npcId);
+	}
+
+	private void verifyInteractionAndPlaySound(final NPC npc, final int npcId)
+	{
+		final Player localPlayer = client.getLocalPlayer();
+		if (localPlayer == null || npc.getInteracting() != localPlayer)
+		{
+			log.debug("Random event NPC did not target local player after delay: {} (name='{}')",
+				npcId, npc.getName());
+			return;
+		}
+
+		log.debug("Random event NPC spawned for local player: {} (name='{}', interactingLocal={})",
+			npcId, npc.getName(), npc.getInteracting() == localPlayer);
+		soundEngine.playClip(Sound.GETTING_RAGGED, executor);
+	}
+
+	private static class PendingRandomEventCheck
+	{
+		private final NPC npc;
+		private final int npcId;
+		private final int dueTick;
+
+		private PendingRandomEventCheck(final NPC npc, final int npcId, final int dueTick)
+		{
+			this.npc = npc;
+			this.npcId = npcId;
+			this.dueTick = dueTick;
+		}
 	}
 }

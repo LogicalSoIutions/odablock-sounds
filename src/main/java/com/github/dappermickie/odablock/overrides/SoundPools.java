@@ -134,7 +134,7 @@ public final class SoundPools
 		names.put("accepttrade", "Accept Trade");
 		names.put("declinetrade", "Decline Trade");
 		names.put("dismissrandomevent", "Dismiss Random Event");
-		names.put("gettingragged", "Getting Ragged");
+		names.put("gettingragged", "Random Event Spawned");
 		names.put("vengeance", "Vengeance");
 		names.put("playerkilling", "Killing Player");
 		names.put("reportplayer", "Report Player");
@@ -167,7 +167,7 @@ public final class SoundPools
 		names.put("welcomescreen", "Welcome Screen");
 		names.put("crypt", "Crypt (Dharok Barrows)");
 		names.put("freeze", "Freeze");
-		names.put("serynadismiss", "Dismiss Seryna");
+		names.put("serynadismiss", "Dismiss Sandwich Lady");
 		names.put("warriors", "Odablock Warriors");
 		names.put("clientdisconnects", "Client Disconnects");
 		return Collections.unmodifiableMap(names);

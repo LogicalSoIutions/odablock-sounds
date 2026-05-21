@@ -65,7 +65,10 @@ public class SoundOverridesPanel extends PluginPanel
 	@Override
 	public void onActivate()
 	{
-		SwingUtilities.invokeLater(listView::refresh);
+		SwingUtilities.invokeLater(() -> {
+			soundOverrideService.sanitizePersistedOverrides(true);
+			listView.refresh();
+		});
 	}
 
 	private void showList()

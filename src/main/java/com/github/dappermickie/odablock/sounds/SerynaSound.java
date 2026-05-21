@@ -27,7 +27,7 @@ public class SerynaSound
 
 	public void onMenuOptionClicked(MenuOptionClicked menuOptionClicked)
 	{
-		if (!config.serynaSound())
+		if (!config.sandwichLadySound())
 		{
 			return;
 		}

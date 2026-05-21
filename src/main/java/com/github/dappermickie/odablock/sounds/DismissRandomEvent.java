@@ -7,8 +7,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.NPC;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.widgets.Widget;
 
@@ -16,10 +14,6 @@ import net.runelite.api.widgets.Widget;
 @Slf4j
 public class DismissRandomEvent
 {
-
-	@Inject
-	private Client client;
-
 	@Inject
 	private OdablockConfig config;
 
@@ -42,29 +36,15 @@ public class DismissRandomEvent
 		Widget widget = menuOptionClicked.getWidget();
 		int widgetId = widget == null ? -1 : widget.getId();
 		String option = menuOptionClicked.getMenuOption();
-		NPC clickedNpc = getClickedNpc(menuOptionClicked);
-		int clickedNpcId = clickedNpc == null ? -1 : clickedNpc.getId();
 		// Dismiss random event
 		if (config.dismissRandomEvent()
 			&& option.equals(optionText)
 			&& widgetId != runePouchWidgetId
 			&& widgetId != lootingBagWidgetId
 			&& widgetId != chuggingBarrelWidgetId
-			&& randomEventSpawned.isRandomEventNpcId(clickedNpcId))
+			&& randomEventSpawned.isRandomEventNpcId(menuOptionClicked.getId()))
 		{
 			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, executor);
 		}
-	}
-
-	private NPC getClickedNpc(final MenuOptionClicked menuOptionClicked)
-	{
-		final int npcIndex = menuOptionClicked.getId();
-		final NPC[] cachedNpcs = client.getCachedNPCs();
-		if (cachedNpcs == null || npcIndex < 0 || npcIndex >= cachedNpcs.length)
-		{
-			return null;
-		}
-
-		return cachedNpcs[npcIndex];
 	}
 }

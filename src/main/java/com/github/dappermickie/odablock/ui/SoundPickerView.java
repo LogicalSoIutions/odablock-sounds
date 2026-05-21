@@ -297,7 +297,7 @@ class SoundPickerView extends JPanel
 		}
 		hasUserEditedSelection = true;
 		persistSelections();
-		rebuildRows(false);
+		updateSummary();
 	}
 
 	private void previewOption(SoundOverrideOption option)

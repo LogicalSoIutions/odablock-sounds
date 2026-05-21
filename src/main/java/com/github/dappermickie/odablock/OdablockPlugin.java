@@ -383,7 +383,6 @@ public class OdablockPlugin extends Plugin
 			case LOGGING_IN:
 			case LOGIN_SCREEN_AUTHENTICATOR:
 				levelUp.clear();
-				levelUp.setLastLoginTick(-1);
 				achievementDiaries.clearOldAchievementDiaries();
 			case CONNECTION_LOST:
 				// set to -1 here in-case of race condition with varbits changing before this handler is called

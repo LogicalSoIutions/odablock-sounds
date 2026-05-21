@@ -7,6 +7,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Client;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.widgets.Widget;
 
@@ -15,6 +16,9 @@ import net.runelite.api.widgets.Widget;
 public class DismissRandomEvent
 {
 	@Inject
+	private Client client;
+
+	@Inject
 	private OdablockConfig config;
 
 	@Inject
@@ -22,9 +26,6 @@ public class DismissRandomEvent
 
 	@Inject
 	private ScheduledExecutorService executor;
-
-	@Inject
-	private RandomEventSpawned randomEventSpawned;
 
 	private static final String optionText = "Dismiss";
 	private static final int runePouchWidgetId = 983062;
@@ -41,8 +42,7 @@ public class DismissRandomEvent
 			&& option.equals(optionText)
 			&& widgetId != runePouchWidgetId
 			&& widgetId != lootingBagWidgetId
-			&& widgetId != chuggingBarrelWidgetId
-			&& randomEventSpawned.isRandomEventNpcId(menuOptionClicked.getId()))
+			&& widgetId != chuggingBarrelWidgetId)
 		{
 			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, executor);
 		}

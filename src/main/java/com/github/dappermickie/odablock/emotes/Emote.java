@@ -76,12 +76,12 @@ public enum Emote
 
 	BufferedImage loadImage()
 	{
-		return ImageUtil.loadImageResource(getClass(), this.name().toLowerCase() + getEmoteTypeExtension());
+	return ImageUtil.loadImageResource(getClass(), this.name().toLowerCase());
 	}
 
 	BufferedImage loadOverheadImage()
 	{
-		String path = this.name().toLowerCase() + "_overhead" + getEmoteTypeExtension();
+		String path = this.name().toLowerCase() + "_overhead.png";
 		try
 		{
 			if (getClass().getResource(path) != null)
@@ -94,11 +94,6 @@ public enum Emote
 			// Ignore and fallback to standard image
 		}
 		return loadImage();
-	}
-
-	private String getEmoteTypeExtension()
-	{
-		return emoteType == EmoteType.GIF ? ".gif" : ".png";
 	}
 
 	static Emote getEmoji(String trigger)

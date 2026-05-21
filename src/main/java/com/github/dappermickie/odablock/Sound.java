@@ -83,7 +83,7 @@ public enum Sound
 	ACHIEVEMENT_DIARY("achievementdiary", "AchievementDiary_r1.wav"),
 	ACHIEVEMENT_DIARY_2("achievementdiary", "AchievementDiary_r2.wav"),
 	EASTER_EGG_STRAYDOG_BONE("givebone", "GiveBone.wav"),
-	BIG_GMON("biggmon", "Big_Gmon.wav"),
+	Big_Gamon("biggamon", "Big_Gamon.wav"),
 	REGULAR_GAMON("regulargamon", "Regular_Gamon.wav"),
 	HAIRDRESSER_SOUND_1("hairdresser", "Hairdresser_r1.wav"),
 	HAIRDRESSER_SOUND_2("hairdresser", "Hairdresser_r2.wav"),

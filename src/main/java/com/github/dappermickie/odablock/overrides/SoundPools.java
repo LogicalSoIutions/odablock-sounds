@@ -124,7 +124,7 @@ public final class SoundPools
 		names.put("death", "Death");
 		names.put("levelup", "Level Up");
 		names.put("regulargamon", "Level 99");
-		names.put("biggmon", "Max Total Level");
+		names.put("biggamon", "Max Total Level");
 		names.put("collectionlog", "Collection Log");
 		names.put("quest", "Quest Completed");
 		names.put("combattask", "Combat Achievement");

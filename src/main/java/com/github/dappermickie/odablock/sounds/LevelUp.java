@@ -94,7 +94,7 @@ public class LevelUp
 
 			if (announceMaxTotalLevel)
 			{
-				soundEngine.playClip(Sound.BIG_GMON, executor);
+				soundEngine.playClip(Sound.Big_Gamon, executor);
 			}
 			else
 			{

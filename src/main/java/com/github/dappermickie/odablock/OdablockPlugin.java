@@ -35,7 +35,6 @@ import com.github.dappermickie.odablock.sounds.QuestCompleted;
 import com.github.dappermickie.odablock.sounds.RedemptionProc;
 import com.github.dappermickie.odablock.sounds.ReportPlayer;
 import com.github.dappermickie.odablock.sounds.RubyBoltProc;
-import com.github.dappermickie.odablock.sounds.SerynaSound;
 import com.github.dappermickie.odablock.sounds.SpellbookSwap;
 import com.github.dappermickie.odablock.sounds.SnowBalled;
 import com.github.dappermickie.odablock.sounds.ToaChestLight;
@@ -237,9 +236,6 @@ public class OdablockPlugin extends Plugin
 
 	@Inject
 	private CryptSound cryptSound;
-
-	@Inject
-	private SerynaSound serynaSound;
 
 	@Inject
 	private WelcomeScreenSound welcomeScreen;
@@ -522,7 +518,6 @@ public class OdablockPlugin extends Plugin
 		turnOnRun.onMenuOptionClicked(menuOptionClicked);
 		reportPlayer.onMenuOptionClicked(menuOptionClicked);
 		declineTrade.onMenuOptionClicked(menuOptionClicked);
-		serynaSound.onMenuOptionClicked(menuOptionClicked);
 		dismissRandomEvent.onMenuOptionClicked(menuOptionClicked);
 		odablockWarriors.onMenuOptionClicked(menuOptionClicked);
 	}

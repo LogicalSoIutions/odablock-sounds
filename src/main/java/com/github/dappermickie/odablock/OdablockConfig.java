@@ -585,18 +585,6 @@ public interface OdablockConfig extends Config
 		return true;
 	}
 
-	@ConfigItem(
-		keyName = "sandwichLadySound",
-		name = "Dismiss Sandwich Lady",
-		description = "Should Odablock play a custom sound when you dismiss the sandwich lady?",
-		section = INTERACTIONS_SECTION,
-		position = 62
-	)
-	default boolean sandwichLadySound()
-	{
-		return true;
-	}
-
 	// =========================================================================
 	// Raids
 	// =========================================================================

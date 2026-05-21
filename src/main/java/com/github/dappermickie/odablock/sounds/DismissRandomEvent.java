@@ -3,14 +3,13 @@ package com.github.dappermickie.odablock.sounds;
 import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.gameval.NpcID;
-
+import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.concurrent.ScheduledExecutorService;
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Client;
+import net.runelite.api.NPC;
+import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.widgets.Widget;
 
 @Singleton
@@ -43,16 +42,29 @@ public class DismissRandomEvent
 		Widget widget = menuOptionClicked.getWidget();
 		int widgetId = widget == null ? -1 : widget.getId();
 		String option = menuOptionClicked.getMenuOption();
+		NPC clickedNpc = getClickedNpc(menuOptionClicked);
+		int clickedNpcId = clickedNpc == null ? -1 : clickedNpc.getId();
 		// Dismiss random event
 		if (config.dismissRandomEvent()
 			&& option.equals(optionText)
 			&& widgetId != runePouchWidgetId
 			&& widgetId != lootingBagWidgetId
 			&& widgetId != chuggingBarrelWidgetId
-			&& menuOptionClicked.getId() != NpcID.MACRO_SANDWICH_LADY_NPC
-			&& randomEventSpawned.isRandomEventNpcId(menuOptionClicked.getId()))
+			&& randomEventSpawned.isRandomEventNpcId(clickedNpcId))
 		{
 			soundEngine.playClip(Sound.DISMISSING_RANDOM_EVENT, executor);
 		}
+	}
+
+	private NPC getClickedNpc(final MenuOptionClicked menuOptionClicked)
+	{
+		final int npcIndex = menuOptionClicked.getId();
+		final NPC[] cachedNpcs = client.getCachedNPCs();
+		if (cachedNpcs == null || npcIndex < 0 || npcIndex >= cachedNpcs.length)
+		{
+			return null;
+		}
+
+		return cachedNpcs[npcIndex];
 	}
 }

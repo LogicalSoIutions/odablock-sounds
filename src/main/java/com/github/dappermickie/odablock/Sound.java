@@ -76,6 +76,7 @@ public enum Sound
 	HAIRDRESSER_SOUND_2("hairdresser", "Hairdresser_r2.wav"),
 	HAIRDRESSER_SOUND_3("hairdresser", "Hairdresser_r3.wav"),
 	TURNING_ON_RUN("turningonrun", "TurningOnRun.wav"),
+	ITEM_DROP("itemdrop", "OhMyRod.wav"),
 	TYPING_IN_BANKPIN("typingbankpin", "TypingInBankpin.wav"),
 	SPELLBOOK_SWAP_1("spellbookswap", "SpellbookSwap_r1.wav"),
 	SPELLBOOK_SWAP_2("spellbookswap", "SpellbookSwap_r2.wav"),

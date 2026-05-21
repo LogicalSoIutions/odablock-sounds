@@ -22,6 +22,7 @@ import com.github.dappermickie.odablock.sounds.EnteringBankPin;
 import com.github.dappermickie.odablock.sounds.FreezeSound;
 import com.github.dappermickie.odablock.sounds.GiveBone;
 import com.github.dappermickie.odablock.sounds.HairDresser;
+import com.github.dappermickie.odablock.sounds.ItemDrop;
 import com.github.dappermickie.odablock.sounds.KillingPlayer;
 import com.github.dappermickie.odablock.sounds.KillingRat;
 import com.github.dappermickie.odablock.sounds.LevelUp;
@@ -84,6 +85,8 @@ import net.runelite.api.events.WallObjectSpawned;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
+import net.runelite.client.events.NpcLootReceived;
+import net.runelite.client.events.PlayerLootReceived;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
@@ -247,6 +250,9 @@ public class OdablockPlugin extends Plugin
 
 	@Inject
 	private RandomEventSpawned randomEventSpawned;
+
+	@Inject
+	private ItemDrop itemDrop;
 	// End of sound injections
 
 	@Inject
@@ -560,6 +566,18 @@ public class OdablockPlugin extends Plugin
 	public void onNpcSpawned(NpcSpawned npcSpawned)
 	{
 		randomEventSpawned.onNpcSpawned(npcSpawned);
+	}
+
+	@Subscribe
+	public void onNpcLootReceived(NpcLootReceived event)
+	{
+		itemDrop.onNpcLootReceived(event);
+	}
+
+	@Subscribe
+	public void onPlayerLootReceived(PlayerLootReceived event)
+	{
+		itemDrop.onPlayerLootReceived(event);
 	}
 
 	@Subscribe

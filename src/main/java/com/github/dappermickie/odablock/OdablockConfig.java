@@ -585,6 +585,31 @@ public interface OdablockConfig extends Config
 		return true;
 	}
 
+	@ConfigItem(
+		keyName = "itemDrop",
+		name = "Item Drop",
+		description = "Should Odablock play a sound when you receive a valuable item drop from a kill?",
+		section = INTERACTIONS_SECTION,
+		position = 62
+	)
+	default boolean itemDrop()
+	{
+		return true;
+	}
+
+	@Range(min = 0, max = 2147483647)
+	@ConfigItem(
+		keyName = "itemDropMinGeValue",
+		name = "Item Drop Minimum GE Value",
+		description = "Minimum Grand Exchange value for loot from your kills to trigger the item drop sound.",
+		section = INTERACTIONS_SECTION,
+		position = 63
+	)
+	default int itemDropMinGeValue()
+	{
+		return 10_000_000;
+	}
+
 	// =========================================================================
 	// Raids
 	// =========================================================================

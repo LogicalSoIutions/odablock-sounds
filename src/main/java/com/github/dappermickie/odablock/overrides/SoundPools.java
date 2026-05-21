@@ -143,6 +143,7 @@ public final class SoundPools
 		names.put("typingbankpin", "Bank Pin");
 		names.put("smited", "Prayer Down");
 		names.put("turningonrun", "Turn On Run");
+		names.put("itemdrop", "Item Drop");
 		names.put("redemption", "Redemption Proc");
 		names.put("ddsspec", "DDS Spec");
 		names.put("agsspec", "AGS Spec");

@@ -468,10 +468,6 @@ public class OdablockPlugin extends Plugin
 		{
 			return;
 		}
-		else if (coxSounds.onChatMessage(chatMessage))
-		{
-			return;
-		}
 		else if (freezeSound.onChatMessage(chatMessage))
 		{
 			return;
@@ -671,12 +667,14 @@ public class OdablockPlugin extends Plugin
 	{
 		toaChestOpens.onGameObjectSpawned(event);
 		tobChestLight.onGameObjectSpawned(event);
+		coxSounds.onGameObjectSpawned(event);
 	}
 
 	@Subscribe
 	private void onGameObjectDespawned(GameObjectDespawned event)
 	{
 		tobChestLight.onGameObjectDespawned(event);
+		coxSounds.onGameObjectDespawned(event);
 	}
 
 	@Subscribe

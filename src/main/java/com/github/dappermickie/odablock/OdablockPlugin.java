@@ -46,7 +46,6 @@ import com.github.dappermickie.odablock.sounds.Vengeance;
 import com.github.dappermickie.odablock.sounds.WelcomeScreenSound;
 import com.github.dappermickie.odablock.sounds.ZebakRoar;
 import com.google.inject.Provides;
-import com.google.inject.name.Named;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -273,9 +272,7 @@ public class OdablockPlugin extends Plugin
 	@Inject
 	private SoundOverridesPanel soundOverridesPanel;
 
-	@Inject
-	@Named("developerMode")
-	private boolean developerMode;
+
 
 	private NavigationButton soundOverridesNavigationButton;
 
@@ -498,7 +495,7 @@ public class OdablockPlugin extends Plugin
 	@Subscribe
 	public void onVarbitChanged(VarbitChanged event)
 	{
-		if (developerMode && config.developerLogging())
+		if (config.developerLogging())
 		{
 			debugScripts.onVarbitChanged(event);
 		}
@@ -516,7 +513,7 @@ public class OdablockPlugin extends Plugin
 	@Subscribe
 	public void onMenuOptionClicked(MenuOptionClicked menuOptionClicked)
 	{
-		if (developerMode && config.developerLogging())
+		if (config.developerLogging())
 		{
 			debugScripts.onMenuOptionClicked(menuOptionClicked);
 		}
@@ -532,7 +529,7 @@ public class OdablockPlugin extends Plugin
 	@Subscribe
 	public void onWidgetLoaded(WidgetLoaded event)
 	{
-		if (developerMode && config.developerLogging())
+		if (config.developerLogging())
 		{
 			debugScripts.onWidgetLoaded(event);
 		}
@@ -685,7 +682,7 @@ public class OdablockPlugin extends Plugin
 	@Subscribe
 	public void onScriptCallbackEvent(ScriptCallbackEvent scriptCallbackEvent)
 	{
-		if (developerMode && config.developerLogging())
+		if (config.developerLogging())
 		{
 			debugScripts.onScriptCallbackEvent(scriptCallbackEvent);
 		}

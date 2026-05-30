@@ -60,6 +60,7 @@ public enum Sound
 	COMBAT_TASK("combattask", "CombatTaskCompleted_r1.wav"),
 	DEATH("death", "DyingHCIMCompleted_r1.wav"),
 	NEW_PET("newpet", "NewPet.wav"),
+	THE_CRANE("thecrane", "thecrane.wav"),
 	KILLING_RAT_OR_SCURRIUS_1("killingrat", "KillingRatOrScurrius_r1.wav"),
 	KILLING_RAT_OR_SCURRIUS_2("killingrat", "KillingRatOrScurrius_r2.wav"),
 

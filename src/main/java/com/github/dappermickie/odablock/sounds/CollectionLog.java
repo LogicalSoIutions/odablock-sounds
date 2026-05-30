@@ -17,6 +17,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.Varbits;
 import net.runelite.api.events.ChatMessage;
+import net.runelite.api.events.GameTick;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.VarbitChanged;
 import net.runelite.client.callback.ClientThread;
@@ -25,6 +26,7 @@ import net.runelite.client.chat.ChatMessageBuilder;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.QueuedMessage;
 import net.runelite.client.events.ConfigChanged;
+import net.runelite.client.util.Text;
 
 @Singleton
 @Slf4j
@@ -55,6 +57,8 @@ public class CollectionLog
 	private Pet pet;
 	private int lastColLogSettingWarning = -1;
 	private boolean gameStateLoggedIn = false;
+	private boolean pendingColLog = false;
+	private String colLogItem = null;
 
 	private static final Set<Integer> badCollectionLogNotificationSettingValues = Set.of(0, 2);
 
@@ -62,23 +66,48 @@ public class CollectionLog
 
 	public boolean onChatMessage(ChatMessage chatMessage)
 	{
-		if (!config.announceCollectionLog() || !COLLECTION_LOG_ITEM_REGEX.matcher(chatMessage.getMessage()).matches())
+		if (!COLLECTION_LOG_ITEM_REGEX.matcher(chatMessage.getMessage()).matches())
 		{
 			return false;
 		}
 
-		int currentTick = client.getTickCount();
-		if (currentTick - pet.getReceivedPetTick() <= 10)
-		{
-			return false;
-		}
+		String message = chatMessage.getMessage();
+		String item = Text.removeTags(message).substring("New item added to your collection log: ".length()).trim();
 
-		if (config.showChatMessages())
-		{
-			client.addChatMessage(ChatMessageType.PUBLICCHAT, ODABLOCK, "Collection log slot: completed.", null);
-		}
-		soundEngine.playClip(Sound.COLLECTION_LOG_SLOT, executor);
+		pendingColLog = true;
+		colLogItem = item;
 		return true;
+	}
+
+	public void onGameTick(GameTick event)
+	{
+		if (pendingColLog)
+		{
+			if (pet.isPendingPetReceived())
+			{
+				if ("Heron".equals(colLogItem))
+				{
+					if (config.receivedPet())
+					{
+						soundEngine.playClip(Sound.THE_CRANE, executor);
+						pet.setHeronReceived();
+					}
+				}
+			}
+			else
+			{
+				if (config.announceCollectionLog())
+				{
+					if (config.showChatMessages())
+					{
+						client.addChatMessage(ChatMessageType.PUBLICCHAT, ODABLOCK, "Collection log slot: completed.", null);
+					}
+					soundEngine.playClip(Sound.COLLECTION_LOG_SLOT, executor);
+				}
+			}
+			pendingColLog = false;
+			colLogItem = null;
+		}
 	}
 
 	private void checkAndWarnForCollectionLogNotificationSetting(int newVarbitValue)

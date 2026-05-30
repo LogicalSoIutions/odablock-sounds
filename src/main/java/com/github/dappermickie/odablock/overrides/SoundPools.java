@@ -130,6 +130,7 @@ public final class SoundPools
 		names.put("combattask", "Combat Achievement");
 		names.put("achievementdiary", "Achievement Diary");
 		names.put("newpet", "New Pet");
+		names.put("thecrane", "The Crane");
 		names.put("pettingdog", "Pet Dog");
 		names.put("accepttrade", "Accept Trade");
 		names.put("declinetrade", "Decline Trade");

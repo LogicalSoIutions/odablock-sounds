@@ -624,6 +624,8 @@ public class OdablockPlugin extends Plugin
 		livestreamManager.onGameTick(event);
 		notificationManager.onGameTick(event);
 		chatRightClickManager.onGameTick(event);
+		collectionLog.onGameTick(event);
+		pet.onGameTick(event);
 
 		// Should always happen after all tick events
 		cleanupTicks(currentTick);

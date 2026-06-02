@@ -12,6 +12,9 @@ import com.github.dappermickie.odablock.sounds.CollectionLog;
 import com.github.dappermickie.odablock.sounds.CombatAchievements;
 import com.github.dappermickie.odablock.sounds.CoxSounds;
 import com.github.dappermickie.odablock.sounds.CryptSound;
+import com.github.dappermickie.odablock.sounds.CustomBarrowsFaces;
+import com.github.dappermickie.odablock.sounds.CustomBarrowsFacesOverlay;
+import net.runelite.client.ui.overlay.OverlayManager;
 import com.github.dappermickie.odablock.sounds.DdsSpec;
 import com.github.dappermickie.odablock.sounds.Death;
 import com.github.dappermickie.odablock.sounds.DeclineTrade;
@@ -255,6 +258,15 @@ public class OdablockPlugin extends Plugin
 	// End of sound injections
 
 	@Inject
+	private CustomBarrowsFaces customBarrowsFaces;
+
+	@Inject
+	private CustomBarrowsFacesOverlay customBarrowsFacesOverlay;
+
+	@Inject
+	private OverlayManager overlayManager;
+
+	@Inject
 	private LivestreamManager livestreamManager;
 
 	@Inject
@@ -287,12 +299,14 @@ public class OdablockPlugin extends Plugin
 		spellbookSwap.setLastLoginTick(-1);
 		emoteHandler.loadEmotes();
 		SwingUtilities.invokeLater(this::setUpOverridesNavigation);
+		overlayManager.add(customBarrowsFacesOverlay);
 		executor.submit(() -> {
 			PlayerKillLineManager.Setup(okHttpClient);
 			SoundFileManager.ensureDownloadDirectoryExists();
 			SoundFileManager.downloadAllMissingSounds(okHttpClient);
 			SnowballUserManager.ensureDownloadDirectoryExists();
 			SnowballUserManager.downloadSnowballUsers(okHttpClient);
+			customBarrowsFaces.reloadImages();
 		});
 	}
 
@@ -302,6 +316,8 @@ public class OdablockPlugin extends Plugin
 		levelUp.clear();
 		achievementDiaries.clearOldAchievementDiaries();
 		soundEngine.close();
+		customBarrowsFaces.shutDown();
+		overlayManager.remove(customBarrowsFacesOverlay);
 		SwingUtilities.invokeLater(this::removeOverridesNavigation);
 	}
 
@@ -595,6 +611,10 @@ public class OdablockPlugin extends Plugin
 			{
 				SwingUtilities.invokeLater(this::setUpOverridesNavigation);
 			}
+			if (event.getKey().startsWith("customBarrows"))
+			{
+				customBarrowsFaces.reloadImages();
+			}
 		}
 	}
 
@@ -626,6 +646,7 @@ public class OdablockPlugin extends Plugin
 		chatRightClickManager.onGameTick(event);
 		collectionLog.onGameTick(event);
 		pet.onGameTick(event);
+		customBarrowsFaces.onGameTick();
 
 		// Should always happen after all tick events
 		cleanupTicks(currentTick);

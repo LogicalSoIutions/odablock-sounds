@@ -898,6 +898,89 @@ public interface OdablockConfig extends Config
 	}
 
 	// =========================================================================
+	// Custom Barrows Faces Settings
+	// =========================================================================
+
+	@ConfigSection(
+		name = "Custom Barrows Faces",
+		description = "Configure custom faces for Barrows Brothers.",
+		position = 600
+	)
+	String CUSTOM_BARROWS_SECTION = "customBarrowsSection";
+
+	@ConfigItem(
+		keyName = "customBarrowsAhrim",
+		name = "Ahrim",
+		description = "Enable custom barrows face overlay for Ahrim.",
+		section = CUSTOM_BARROWS_SECTION,
+		position = 601
+	)
+	default boolean customBarrowsAhrim()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "customBarrowsDharok",
+		name = "Dharok",
+		description = "Enable custom barrows face overlay for Dharok.",
+		section = CUSTOM_BARROWS_SECTION,
+		position = 602
+	)
+	default boolean customBarrowsDharok()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "customBarrowsGuthan",
+		name = "Guthan",
+		description = "Enable custom barrows face overlay for Guthan.",
+		section = CUSTOM_BARROWS_SECTION,
+		position = 603
+	)
+	default boolean customBarrowsGuthan()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "customBarrowsKaril",
+		name = "Karil",
+		description = "Enable custom barrows face overlay for Karil.",
+		section = CUSTOM_BARROWS_SECTION,
+		position = 604
+	)
+	default boolean customBarrowsKaril()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "customBarrowsTorag",
+		name = "Torag",
+		description = "Enable custom barrows face overlay for Torag.",
+		section = CUSTOM_BARROWS_SECTION,
+		position = 605
+	)
+	default boolean customBarrowsTorag()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "customBarrowsVerac",
+		name = "Verac",
+		description = "Enable custom barrows face overlay for Verac.",
+		section = CUSTOM_BARROWS_SECTION,
+		position = 606
+	)
+	default boolean customBarrowsVerac()
+	{
+		return true;
+	}
+
+	// =========================================================================
 	// Internal (hidden)
 	// =========================================================================
 

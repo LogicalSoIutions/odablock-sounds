@@ -607,6 +607,7 @@ public class OdablockPlugin extends Plugin
 		if (OdablockConfig.CONFIG_GROUP.equals(event.getGroup()))
 		{
 			collectionLog.onConfigChanged(event);
+			odablockWarriors.onConfigChanged(event.getKey());
 			if (event.getKey().equals("showSidebar"))
 			{
 				SwingUtilities.invokeLater(this::setUpOverridesNavigation);
@@ -647,6 +648,7 @@ public class OdablockPlugin extends Plugin
 		collectionLog.onGameTick(event);
 		pet.onGameTick(event);
 		customBarrowsFaces.onGameTick();
+		odablockWarriors.onGameTick(event);
 
 		// Should always happen after all tick events
 		cleanupTicks(currentTick);

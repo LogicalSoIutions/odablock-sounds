@@ -874,22 +874,22 @@ public interface OdablockConfig extends Config
 	}
 
 	// =========================================================================
-	// Developer (always last)
+	// Debug
 	// =========================================================================
 
 	@ConfigSection(
-		name = "Developer",
-		description = "Developer mode configurations.",
+		name = "Debug",
+		description = "Troubleshooting and logging options.",
 		position = 900,
 		closedByDefault = true
 	)
-	String DEVELOPER_SECTION = "developerSection";
+	String DEBUG_SECTION = "debugSection";
 
 	@ConfigItem(
 		keyName = "developerLogging",
-		name = "Developer Logging",
-		description = "Enable developer logging when developer mode is active.",
-		section = DEVELOPER_SECTION,
+		name = "Debug Logging",
+		description = "Log game state changes for troubleshooting.",
+		section = DEBUG_SECTION,
 		position = 901
 	)
 	default boolean developerLogging()

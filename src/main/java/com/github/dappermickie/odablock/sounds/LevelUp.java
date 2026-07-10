@@ -40,6 +40,9 @@ public class LevelUp
 	private static final String level99Message = "Level 99: completed.";
 	private static final String maxTotalLevelMessage = "Max total level: completed.";
 	private static final int LOGIN_STAT_SYNC_TICK_GRACE = 1;
+	private static final int PVP_ARENA_WORLD_1 = 558;
+	private static final int PVP_ARENA_WORLD_2 = 570;
+	private static final int PVP_ARENA_WORLD_3 = 578;
 
 	private final Map<Skill, Integer> oldExperience = new EnumMap<>(Skill.class);
 	private int oldTotalLevel = -1;
@@ -59,6 +62,11 @@ public class LevelUp
 
 		oldExperience.put(skill, xpAfter);
 		oldTotalLevel = totalLevelAfter;
+
+		if (isPvpArenaWorld())
+		{
+			return;
+		}
 
 		// Ignore the login stat sync window. During this period, the client can report
 		// transient stat values that would otherwise look like massive level jumps.
@@ -140,5 +148,11 @@ public class LevelUp
 	public void setLastLoginTick(int tick)
 	{
 		lastLoginTick = tick;
+	}
+
+	private boolean isPvpArenaWorld()
+	{
+		final int world = client.getWorld();
+		return world == PVP_ARENA_WORLD_1 || world == PVP_ARENA_WORLD_2 || world == PVP_ARENA_WORLD_3;
 	}
 }

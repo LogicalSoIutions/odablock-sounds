@@ -54,13 +54,10 @@ public class KillingPlayer
 			}
 		{
 			Pattern[] patterns = PlayerKillLineManager.getPatterns();
-			for (Pattern pattern : patterns)
+			if (isPlayerKillMessage(standardized, patterns))
 			{
-				if (pattern.matcher(standardized).matches())
-				{
-					playSound(true);
-					return true;
-				}
+				playSound(true);
+				return true;
 			}
 
 			if (standardized.equalsIgnoreCase(local.getName() + " has won!"))
@@ -69,6 +66,26 @@ public class KillingPlayer
 				return true;
 			}
 		}
+		return false;
+	}
+
+	static boolean isPlayerKillMessage(String message, Pattern[] patterns)
+	{
+		// Loot broadcasts can start with a player's name, including names such as "Rip Arthur"
+		// that match the intentionally broad "rip.*" PvP kill pattern.
+		if (message.contains(" received a drop:"))
+		{
+			return false;
+		}
+
+		for (Pattern pattern : patterns)
+		{
+			if (pattern.matcher(message).matches())
+			{
+				return true;
+			}
+		}
+
 		return false;
 	}
 

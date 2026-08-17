@@ -442,6 +442,7 @@ public class OdablockPlugin extends Plugin
 	public void onChatMessage(ChatMessage chatMessage)
 	{
 		emoteHandler.onChatMessage(chatMessage);
+		reportPlayer.onChatMessage(chatMessage);
 
 		if (acceptTrade.onChatMessage(chatMessage))
 		{

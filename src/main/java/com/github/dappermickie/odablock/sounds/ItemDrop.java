@@ -58,7 +58,7 @@ public class ItemDrop
 
 		for (final ItemStack item : items)
 		{
-			final int geValue = getGeValue(item);
+			final long geValue = getGeValue(item);
 			if (geValue >= minGeValue)
 			{
 				final ItemComposition itemComposition = itemManager.getItemComposition(item.getId());
@@ -70,7 +70,7 @@ public class ItemDrop
 		}
 	}
 
-	private int getGeValue(final ItemStack item)
+	private long getGeValue(final ItemStack item)
 	{
 		final int itemId = item.getId();
 		final ItemComposition itemComposition = itemManager.getItemComposition(itemId);
@@ -82,6 +82,6 @@ public class ItemDrop
 			return quantity;
 		}
 
-		return itemManager.getItemPrice(realItemId) * quantity;
+		return (long) itemManager.getItemPrice(realItemId) * quantity;
 	}
 }

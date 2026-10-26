@@ -42,6 +42,7 @@ import com.github.dappermickie.odablock.sounds.RubyBoltProc;
 import com.github.dappermickie.odablock.sounds.SpellbookSwap;
 import com.github.dappermickie.odablock.sounds.SnowBalled;
 import com.github.dappermickie.odablock.sounds.ToaChestLight;
+import com.github.dappermickie.odablock.sounds.TfaChestLight;
 import com.github.dappermickie.odablock.sounds.ToaChestOpens;
 import com.github.dappermickie.odablock.sounds.TobChestLight;
 import com.github.dappermickie.odablock.sounds.TurnOnRun;
@@ -224,6 +225,9 @@ public class OdablockPlugin extends Plugin
 	private CoxSounds coxSounds;
 
 	@Inject
+	private TfaChestLight tfaChestLight;
+
+	@Inject
 	private ZebakRoar zebakRoar;
 
 	@Inject
@@ -313,6 +317,7 @@ public class OdablockPlugin extends Plugin
 	@Override
 	protected void shutDown() throws Exception
 	{
+		tfaChestLight.reset();
 		levelUp.clear();
 		achievementDiaries.clearOldAchievementDiaries();
 		soundEngine.close();
@@ -393,6 +398,7 @@ public class OdablockPlugin extends Plugin
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged event)
 	{
+		tfaChestLight.onGameStateChanged(event);
 		collectionLog.onGameStateChanged(event);
 		switch (event.getGameState())
 		{
@@ -642,6 +648,7 @@ public class OdablockPlugin extends Plugin
 		prayerDown.onGameTick(event);
 		tobChestLight.onGameTick(event);
 		coxSounds.onGameTick(event);
+		tfaChestLight.onGameTick(event);
 		randomEventSpawned.onGameTick(event);
 		livestreamManager.onGameTick(event);
 		notificationManager.onGameTick(event);

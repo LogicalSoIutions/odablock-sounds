@@ -52,17 +52,19 @@ public class EmoteHandler
 		}
 
 		Emote[] emotes = Emote.values();
-		chatIconIds = new int[emotes.length];
-		overheadIconIds = new int[emotes.length];
+		final int[] loadedChatIconIds = new int[emotes.length];
+		final int[] loadedOverheadIconIds = new int[emotes.length];
 
 		for (int i = 0; i < emotes.length; i++)
 		{
 			final Emote emoji = emotes[i];
 			final BufferedImage chatImage = emoji.loadImage();
 			final BufferedImage overheadImage = emoji.loadOverheadImage();
-			chatIconIds[i] = chatIconManager.registerChatIcon(chatImage);
-			overheadIconIds[i] = chatIconManager.registerChatIcon(overheadImage);
+			loadedChatIconIds[i] = chatIconManager.registerChatIcon(chatImage);
+			loadedOverheadIconIds[i] = chatIconManager.registerChatIcon(overheadImage);
 		}
+		overheadIconIds = loadedOverheadIconIds;
+		chatIconIds = loadedChatIconIds;
 	}
 
 	public void onChatMessage(ChatMessage chatMessage)
@@ -186,6 +188,11 @@ public class EmoteHandler
 	@Nullable
 	String updateMessage(final String message, final boolean isOverhead)
 	{
+		if (chatIconIds == null)
+		{
+			return null;
+		}
+
 		final String[] messageWords = WHITESPACE_REGEXP.split(message);
 		final String[] ignoredEmotes = config.emoteIgnoreList().split(",");
 

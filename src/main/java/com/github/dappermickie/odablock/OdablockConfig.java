@@ -719,6 +719,37 @@ public interface OdablockConfig extends Config
 		return true;
 	}
 
+	@ConfigSection(
+		name = "The Fractured Archive",
+		description = "All configurations regarding The Fractured Archive.",
+		position = 350
+	)
+	String TFA_SECTION = "tfaSection";
+
+	@ConfigItem(
+		keyName = "tfaWhiteChest",
+		name = "TFA White Chest",
+		description = "Should Odablock say something when there is no unique chest at The Fractured Archive?",
+		section = TFA_SECTION,
+		position = 351
+	)
+	default boolean tfaWhiteChest()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "tfaPurpleChest",
+		name = "TFA Purple Chest",
+		description = "Should Odablock say something when your team receives a unique chest at The Fractured Archive?",
+		section = TFA_SECTION,
+		position = 352
+	)
+	default boolean tfaPurpleChest()
+	{
+		return true;
+	}
+
 	// =========================================================================
 	// Music & Emotes
 	// =========================================================================

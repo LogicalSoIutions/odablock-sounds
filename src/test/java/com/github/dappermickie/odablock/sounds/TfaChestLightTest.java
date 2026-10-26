@@ -4,7 +4,9 @@ import com.github.dappermickie.odablock.OdablockConfig;
 import com.github.dappermickie.odablock.Sound;
 import com.github.dappermickie.odablock.SoundEngine;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
@@ -16,6 +18,7 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.gameval.NpcID;
+import net.runelite.api.gameval.SpotanimID;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,15 +71,16 @@ public class TfaChestLightTest
 	}
 
 	@Test
-	public void uniqueArrivingOnNextTickTakesPriorityOverWhite()
+	public void noSparklingChestPlaysPurpleBeforeUniqueRevealAndDoesNotReplay()
 	{
-		NPC own = chest(NpcID.TFA_REWARDS_CHEST_VAULT_CLOSED_MINE);
-		doReturn(Collections.singletonList(own)).when(client).getNpcs();
+		List<NPC> chests = standardChests();
+		doReturn(chests).when(client).getNpcs();
 		tick();
-		doReturn(Arrays.asList(own, chest(NpcID.TFA_UNIQUE_CHEST_VAULT_CLOSED))).when(client).getNpcs();
-		tick();
+		verifyNoInteractions(engine);
 		tick();
 		verify(engine).playClip(Sound.GETTING_PURPLE_1, executor);
+		chests.add(chest(NpcID.TFA_UNIQUE_CHEST_VAULT_CLOSED));
+		tick();
 		verifyNoMoreInteractions(engine);
 	}
 
@@ -84,8 +88,7 @@ public class TfaChestLightTest
 	public void disabledPurpleDoesNotFallBackToWhite()
 	{
 		when(config.tfaPurpleChest()).thenReturn(false);
-		doReturn(Arrays.asList(
-			chest(NpcID.TFA_REWARDS_CHEST_VAULT_CLOSED_MINE), chest(NpcID.TFA_UNIQUE_CHEST_VAULT_OPEN))).when(client).getNpcs();
+		doReturn(standardChests()).when(client).getNpcs();
 		tick();
 		tick();
 		verifyNoInteractions(engine);
@@ -139,6 +142,35 @@ public class TfaChestLightTest
 	}
 
 	@Test
+	public void partiallyLoadedChestsDoNotCountAsMissingSparkle()
+	{
+		List<NPC> chests = standardChests();
+		chests.remove(0);
+		doReturn(chests).when(client).getNpcs();
+		tick();
+		tick();
+		verifyNoInteractions(engine);
+		chests.add(chest(NpcID.TFA_REWARDS_CHEST_VAULT_CLOSED_MINE));
+		tick();
+		tick();
+		verify(engine).playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
+		verifyNoMoreInteractions(engine);
+	}
+
+	@Test
+	public void sparkleArrivingOnFollowingTickPlaysWhiteEvenIfTeammateHasPurple()
+	{
+		List<NPC> chests = standardChests();
+		doReturn(chests).when(client).getNpcs();
+		tick();
+		when(chests.get(0).hasSpotAnim(SpotanimID.VFX_TFA_SMALL_CHEST_SPARKLES)).thenReturn(true);
+		chests.add(chest(NpcID.TFA_UNIQUE_CHEST_VAULT_CLOSED));
+		tick();
+		verify(engine).playClip(Sound.WHITE_LIGHT_AFTER_RAID, executor);
+		verifyNoMoreInteractions(engine);
+	}
+
+	@Test
 	public void unrelatedOrHiddenChestsDoNotTriggerSound()
 	{
 		doReturn(Arrays.asList(mock(NPC.class),
@@ -162,6 +194,16 @@ public class TfaChestLightTest
 		when(npc.getTransformedComposition()).thenReturn(composition);
 		when(composition.getId()).thenReturn(transformedId);
 		return npc;
+	}
+
+	private List<NPC> standardChests()
+	{
+		List<NPC> chests = new ArrayList<>();
+		for (int i = 0; i < 8; i++)
+		{
+			chests.add(chest(NpcID.TFA_REWARDS_CHEST_VAULT_CLOSED_NOTMINE));
+		}
+		return chests;
 	}
 
 	private void tick()

@@ -15,12 +15,14 @@ import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.gameval.NpcID;
+import net.runelite.api.gameval.SpotanimID;
 
 @Singleton
 public class TfaChestLight
 {
 	// Loot room template region, also used by the TFA Plugin Hub plugin's RaidRoom.
 	private static final int LOOT_REGION = 16474;
+	private static final int STANDARD_CHEST_COUNT = 8;
 
 	private final Client client;
 	private final OdablockConfig config;
@@ -61,6 +63,7 @@ public class TfaChestLight
 
 		boolean ownChest = false;
 		boolean uniqueChest = false;
+		int standardChests = 0;
 		for (NPC npc : client.getNpcs())
 		{
 			// The eight standard chests transform according to ownership and opened state.
@@ -69,7 +72,14 @@ public class TfaChestLight
 			{
 				continue;
 			}
-			switch (composition.getId())
+			int id = composition.getId();
+			if (id >= NpcID.TFA_REWARDS_CHEST_VAULT_CLOSED_NOTMINE
+				&& id <= NpcID.TFA_REWARDS_CHEST_VAULT_OPEN_MINE)
+			{
+				standardChests++;
+				ownChest |= npc.hasSpotAnim(SpotanimID.VFX_TFA_SMALL_CHEST_SPARKLES);
+			}
+			switch (id)
 			{
 				case NpcID.TFA_UNIQUE_CHEST_VAULT_CLOSED:
 				case NpcID.TFA_UNIQUE_CHEST_VAULT_OPEN:
@@ -82,12 +92,14 @@ public class TfaChestLight
 			}
 		}
 
-		if (!ownChest && !uniqueChest)
+		if (!ownChest && !uniqueChest && standardChests < STANDARD_CHEST_COUNT)
 		{
+			rewardsSeen = false;
 			return;
 		}
 
-		// Give the reward NPCs another tick to load before treating an absent unique as a white.
+		// Wait for a stable reward scene before interpreting an absent personal sparkle.
+		// A purple recipient has no personal standard chest, even before the unique reveal.
 		if (!rewardsSeen)
 		{
 			rewardsSeen = true;
@@ -95,7 +107,7 @@ public class TfaChestLight
 		}
 
 		chestsHandled = true;
-		if (uniqueChest)
+		if (!ownChest)
 		{
 			if (config.tfaPurpleChest())
 			{
